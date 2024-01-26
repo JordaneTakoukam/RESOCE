@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:resoce/core/functions/functions.dart';
-import 'package:resoce/core/paths/paths.dart';
-import 'package:resoce/global_widgets/buttons/app_bar_icon.dart';
 import 'package:resoce/global_widgets/logo/logo_app_bar.dart';
 
 PreferredSizeWidget appBarHome({required String titleAppbar}) {
@@ -15,7 +13,7 @@ PreferredSizeWidget appBarHome({required String titleAppbar}) {
     automaticallyImplyLeading: false,
     titleSpacing: 0,
     title: Padding(
-      padding: EdgeInsets.symmetric(horizontal: Get.width * .035),
+      padding: EdgeInsets.only(left: Get.width * .035, right: Get.width * .0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -24,21 +22,49 @@ PreferredSizeWidget appBarHome({required String titleAppbar}) {
             children: [
               const LogoAppbar(),
               const Spacer(),
+              // titleAppbar == 'chats'
+              //     ? Row(
+              //         children: [
+              //           AppBarIcon(
+              //             icone: Chemin.icone.camera,
+              //             ontap: () {},
+              //           ),
+              //           SizedBox(width: Get.width * .02),
+              //           AppBarIcon(
+              //             icone: Chemin.icone.search,
+              //             ontap: () {},
+              //           ),
+              //         ],
+              //       )
+              //     : const SizedBox.shrink(),
+
+              SizedBox(width: Get.width * .01),
               titleAppbar == 'chats'
-                  ? Row(
-                      children: [
-                        AppBarIcon(
-                          icone: Chemin.icone.camera,
-                          ontap: () {},
-                        ),
-                        SizedBox(width: Get.width * .02),
-                        AppBarIcon(
-                          icone: Chemin.icone.search,
-                          ontap: () {},
-                        ),
-                      ],
-                    )
-                  : const SizedBox.shrink(),
+                  ? IconButton(
+                      tooltip: 'Camera',
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.camera_alt,
+                        color: Colors.black,
+                      ))
+                  : SizedBox.shrink(),
+              titleAppbar == 'chats'
+                  ? IconButton(
+                      tooltip: 'recherche',
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.search,
+                        color: Colors.black,
+                      ))
+                  : SizedBox.shrink(),
+
+              IconButton(
+                  tooltip: 'Menu',
+                  onPressed: () {},
+                  icon: Icon(
+                    Icons.more_vert,
+                    color: Colors.black,
+                  ))
             ],
           ),
           Text(

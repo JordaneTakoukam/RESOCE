@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
 
       //
-      initialRoute: Routes.DASHBOARD,
+      initialRoute: Routes.SPLASHSCREEN,
 
       // acceder a toutes les pages de l'app
       getPages: AppPages.pages,

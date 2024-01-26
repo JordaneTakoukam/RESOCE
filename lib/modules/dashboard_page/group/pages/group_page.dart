@@ -53,12 +53,7 @@ class GroupPage extends GetView<GroupController> {
                                     child: Image.asset(Chemin.icone.avatar),
                                   ),
                                 ),
-                                Container(
-                                  padding: EdgeInsets.all(Get.width * .01),
-                                  decoration: const BoxDecoration(
-                                      color: AppColors.greenOnline,
-                                      shape: BoxShape.circle),
-                                ),
+                          
                               ],
                             ),
                             SizedBox(width: Get.width * .02),
@@ -124,7 +119,7 @@ class GroupPage extends GetView<GroupController> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Text(
-                      '13:50',
+                      '16:25',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: Get.width * .027,
@@ -138,7 +133,7 @@ class GroupPage extends GetView<GroupController> {
                       ),
                       padding: EdgeInsets.all(Get.width * .018),
                       child: Text(
-                        '85',
+                        '10',
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: Get.width * .025,
