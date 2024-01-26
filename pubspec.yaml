@@ -1,0 +1,52 @@
+name: resoce
+description: "Une messagerie d'entreprise sécurisée pour une communication fluide et organisée. Protégez la confidentialité des échanges tout en favorisant une collaboration efficace. Simplifiez vos communications professionnelles avec Resoce."
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.2.4 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+  get: ^4.6.6
+  get_storage: ^2.1.1
+  http: ^1.2.0
+  flutter_secure_storage: ^9.0.0
+  shimmer: ^3.0.0
+  flutter_sequence_animation: ^4.0.0
+  smooth_page_indicator: ^1.1.0
+  google_fonts: ^6.1.0
+  flutter_svg: ^2.0.9
+  lottie: ^3.0.0
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+
+flutter:
+
+
+  uses-material-design: true
+
+  # assets
+  assets:
+    - assets/logo/
+    - assets/icones/
+    - assets/sliders/
+    - assets/lotties/
+
+  # # fonts
+  # fonts:
+  #   - family: Schyler
+  #     fonts:
+  #       - asset: fonts/Schyler-Regular.ttf
+  #       - asset: fonts/Schyler-Italic.ttf
+  #         style: italic
+
