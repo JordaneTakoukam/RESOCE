@@ -5,9 +5,9 @@ import 'package:resoce/core/paths/paths.dart';
 import 'package:resoce/core/colors/color_app.dart';
 import 'package:resoce/routes/app_pages.dart';
 
-class WidgetChat extends StatelessWidget {
+class WidgetGroupChat extends StatelessWidget {
   final Map<String, dynamic> listMessage;
-  const WidgetChat({
+  const WidgetGroupChat({
     super.key,
     required this.listMessage,
   });

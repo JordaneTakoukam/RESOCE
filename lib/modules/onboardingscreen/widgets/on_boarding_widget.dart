@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:resoce/core/values/colors/color_app.dart';
+import 'package:resoce/core/colors/color_app.dart';
 import 'package:resoce/data/providers/languages_providers.dart';
 
 class OnBoardingWidgets extends StatelessWidget {

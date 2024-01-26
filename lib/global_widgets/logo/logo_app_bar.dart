@@ -10,10 +10,10 @@ class LogoAppbar extends StatelessWidget {
     return Row(
       children: [
         Text(
-          AppConfig.appName,
+          AppConfig.appNameMinuscule,
           style: TextStyle(
-            color: Colors.white,
-            fontSize: Get.width * .03,
+            color: const Color.fromARGB(255, 145, 144, 144),
+            fontSize: Get.width * .05,
             fontWeight: FontWeight.w900,
           ),
         ),

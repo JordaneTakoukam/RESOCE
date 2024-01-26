@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:resoce/core/values/colors/color_app.dart';
+import 'package:resoce/core/colors/color_app.dart';
 
 class AppBarIcon extends StatelessWidget {
   final VoidCallback ontap;
@@ -14,17 +14,18 @@ class AppBarIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      borderRadius: BorderRadius.circular(10),
       onTap: ontap,
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Colors.grey.withOpacity(.075),
           borderRadius: BorderRadius.circular(8),
         ),
         child: SizedBox(
-          height: Get.width * .085,
-          width: Get.width * .09,
+          height: Get.width * .095,
+          width: Get.width * .095,
           child: Padding(
-            padding: EdgeInsets.all(Get.width * .02),
+            padding: EdgeInsets.all(Get.width * .023),
             child: Image.asset(
               icone,
               color: AppColors.primaryColor,

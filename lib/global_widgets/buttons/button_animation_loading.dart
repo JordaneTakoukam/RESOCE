@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:resoce/core/functions/functions.dart';
-import 'package:resoce/core/values/colors/color_app.dart';
+import 'package:resoce/core/colors/color_app.dart';
 import 'package:resoce/global_widgets/loader/loader.dart';
 
 class ButtonAnimateLoading extends StatelessWidget {

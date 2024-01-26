@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class AppColors {
   static const Color primaryColor =
-      Color.fromARGB(255, 91, 129, 255); // Bleu marine
+      Color.fromARGB(255, 49, 91, 227); // Bleu marine
   static const Color accentColor = Color(0xFF27AE60); // Vert émeraude
   static const Color backgroundColor = Color(0xFFECF0F1); // Gris clair
 

@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:resoce/global_widgets/appbar/appbar_home.dart';
 import 'package:resoce/modules/dashboard_page/chat/controller/chat_controller.dart';
 import 'package:resoce/modules/dashboard_page/chat/widgets/body_discussion.dart';
-import 'package:resoce/modules/dashboard_page/chat/widgets/new_chat.dart';
+import 'package:resoce/modules/dashboard_page/chat/widgets/new_chat_button.dart';
 
 class ChatPage extends StatefulWidget {
   const ChatPage({super.key});
@@ -59,7 +59,7 @@ class _ChatPageState extends State<ChatPage> {
       body: BodyDiscussionPage(scrollController: _scrollController),
       floatingActionButton: Visibility(
         visible: _isFabVisible,
-        child: const NewChat(),
+        child: const NewChatButton(),
       ),
     );
   }

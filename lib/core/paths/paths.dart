@@ -39,6 +39,9 @@ class ICONES {
   String pinned = 'assets/icones/pin.png';
 
   String cameraVideo = 'assets/icones/video-camera.png';
+  String microphone = 'assets/icones/microphone.png';
+  String paperPin = 'assets/icones/paper-pin.png';
+  String write = 'assets/icones/write.png';
 }
 
 class LOTTIES {

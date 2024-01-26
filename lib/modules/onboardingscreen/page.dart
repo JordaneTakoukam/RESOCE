@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:resoce/core/values/colors/color_app.dart';
+import 'package:resoce/core/colors/color_app.dart';
 import 'package:resoce/global_widgets/buttons/button_animation_loading.dart';
 import 'package:resoce/global_widgets/loader/loader.dart';
 import 'package:resoce/modules/onboardingscreen/controller.dart';
