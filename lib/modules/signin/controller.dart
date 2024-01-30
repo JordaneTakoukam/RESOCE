@@ -40,7 +40,7 @@ class SignInController extends GetxController {
   }
 
   // fonction pour le login
-  Future<void> userLogin() async {
+  Future<String> userLogin() async {
     closeKeyboardLogin();
 
     pageLoading.value = true;
@@ -48,10 +48,23 @@ class SignInController extends GetxController {
     try {
       //
       var result = await repository.loginApi(
-        login: passwordController.value.text.trim(),
+        loginId: idController.value.text.trim(),
         password: passwordController.value.text.trim(),
       );
+
+      if (result['data'] != null) {
+      } else {
+        pageLoading.value = false;
+
+        return result['message'];
+      }
+
+      pageLoading.value = false;
+
       //
-    } catch (e) {}
+    } catch (e) {
+      pageLoading.value = false;
+    }
+    return '';
   }
 }

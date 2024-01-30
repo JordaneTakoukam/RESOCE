@@ -4,9 +4,8 @@ import 'dart:convert';
 import 'package:resoce/.config.dart';
 
 class SignInRepository {
-
   Future<Map<String, dynamic>> loginApi({
-    required String login,
+    required String loginId,
     required String password,
   }) async {
     final url = Uri.parse('${AppConfig.api}/api/v1/auth/signin/client');
@@ -18,7 +17,7 @@ class SignInRepository {
           'Content-Type': 'application/json; charset=UTF-8',
         },
         body: jsonEncode({
-          "login": login,
+          "loginId": loginId,
           "password": password,
         }),
       );

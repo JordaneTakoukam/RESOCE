@@ -85,10 +85,13 @@ class SignInPage extends GetView<SignInController> {
                     ),
                     SizedBox(height: Get.height * .05),
                     ButtonFlat(
-                      callback: () {
+                      callback: () async {
                         if (formSignin.currentState!.validate()) {
-                          controller.userLogin();
-                          // Get.toNamed(Routes.DASHBOARD);
+                          var messageResult = await controller.userLogin();
+
+                          if (messageResult != '') {
+                            print(messageResult);
+                          }
                         }
                       },
                       title: capitalizeText('log_in'.tr),
