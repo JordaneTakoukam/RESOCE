@@ -7,8 +7,6 @@ import 'package:resoce/modules/signin/repository.dart';
 class SignInController extends GetxController {
   final SignInRepository repository = SignInRepository();
 
-  RxBool isLoad = false.obs;
-
   RxBool pageLoading = false.obs;
   RxBool pageError = false.obs;
 
@@ -45,6 +43,15 @@ class SignInController extends GetxController {
   Future<void> userLogin() async {
     closeKeyboardLogin();
 
-    isLoad.value = true;
+    pageLoading.value = true;
+
+    try {
+      //
+      var result = await repository.loginApi(
+        login: passwordController.value.text.trim(),
+        password: passwordController.value.text.trim(),
+      );
+      //
+    } catch (e) {}
   }
 }

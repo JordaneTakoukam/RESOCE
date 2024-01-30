@@ -21,8 +21,6 @@ class SignInPage extends GetView<SignInController> {
   Widget build(BuildContext context) {
     final GlobalKey<FormState> formSignin = GlobalKey<FormState>();
 
-    FocusNode focusNode = FocusNode();
-
     return Scaffold(
       backgroundColor: Colors.white,
       body: Stack(
