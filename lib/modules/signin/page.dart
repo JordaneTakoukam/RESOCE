@@ -21,6 +21,8 @@ class SignInPage extends GetView<SignInController> {
   Widget build(BuildContext context) {
     final GlobalKey<FormState> formSignin = GlobalKey<FormState>();
 
+    FocusNode focusNode = FocusNode();
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Stack(
@@ -88,7 +90,7 @@ class SignInPage extends GetView<SignInController> {
                       callback: () {
                         if (formSignin.currentState!.validate()) {
                           controller.userLogin();
-                          Get.toNamed(Routes.DASHBOARD);
+                          // Get.toNamed(Routes.DASHBOARD);
                         }
                       },
                       title: capitalizeText('log_in'.tr),

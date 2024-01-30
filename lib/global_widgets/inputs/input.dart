@@ -57,7 +57,7 @@ class _InputTextAuthState extends State<InputTextAuth> {
               fontSize: Get.width * .045,
               color: Colors.grey.shade800,
             ),
-            // focusNode: widget.focusNode,
+            focusNode: widget.focusNode,
             controller: widget.controller,
             obscureText: !passwordVisible && widget.obscureText,
             enabled: widget.enabled,

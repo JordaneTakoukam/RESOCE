@@ -10,17 +10,19 @@ class IdInput extends GetView<SignInController> {
 
   @override
   Widget build(BuildContext context) {
-    return InputTextAuth(
-      considereMaj: false,
-      focusNode: controller.focusId,
-      width: width,
-      required: true,
-      labelText: capitalizeText('identifier'.tr),
-      keyboardType: TextInputType.text,
-      controller: controller.idController.value,
-      validator: (value) {
-        return validateIdInput(value);
-      },
+    return Obx(
+      () => InputTextAuth(
+        considereMaj: false,
+        focusNode: controller.focusId,
+        width: width,
+        required: true,
+        labelText: capitalizeText('identifier'.tr),
+        keyboardType: TextInputType.text,
+        controller: controller.idController.value,
+        validator: (value) {
+          return validateIdInput(value);
+        },
+      ),
     );
   }
 }

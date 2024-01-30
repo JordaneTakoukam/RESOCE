@@ -36,7 +36,7 @@ String capitalizeText(String text) {
 // foncttion pour valider l'id input sign
 dynamic validateIdInput(String value) {
   bool validId(String id) {
-    return id.length >= 10;
+    return id.length >= 7;
   }
 
   if (value.isEmpty) {

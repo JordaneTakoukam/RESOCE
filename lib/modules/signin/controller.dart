@@ -7,6 +7,8 @@ import 'package:resoce/modules/signin/repository.dart';
 class SignInController extends GetxController {
   final SignInRepository repository = SignInRepository();
 
+  RxBool isLoad = false.obs;
+
   RxBool pageLoading = false.obs;
   RxBool pageError = false.obs;
 
@@ -23,6 +25,13 @@ class SignInController extends GetxController {
     passwordController = TextEditingController().obs;
   }
 
+  @override
+  void onClose() {
+    idController.value.dispose();
+    passwordController.value.dispose();
+    super.onClose();
+  }
+
   void closeKeyboardLogin() {
     try {
       focusId.unfocus();
@@ -33,7 +42,9 @@ class SignInController extends GetxController {
   }
 
   // fonction pour le login
-  void userLogin() async {
+  Future<void> userLogin() async {
     closeKeyboardLogin();
+
+    isLoad.value = true;
   }
 }
