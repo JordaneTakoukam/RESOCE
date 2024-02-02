@@ -11,6 +11,7 @@ abstract class Chemin {
 class LOGO {
   String logo1 = 'assets/logo/logo_test_1.png';
   String logo2 = 'assets/logo/logo_test_2.png';
+  String logo3 = 'assets/logo/logo_test_3.png';
 }
 
 class ICONES {

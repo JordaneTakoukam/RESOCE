@@ -14,29 +14,30 @@ class SplashScreenController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
-    pageError.value = false;
 
-    Future.delayed(const Duration(seconds: 3), () {
-      Get.offAllNamed(Routes.CHOOSELANGUAGE);
-    });
-    // existUser = await _repository.getExistingUser();
+    //
+    // initialisation du stockage locale
 
-    // // on vas vers la page onboarding
-    // if (!existUser) {
-    //   // delay pour attendre que la page splash s'affiche avant de continuer
-    // Future.delayed(const Duration(seconds: 3), () {
-    //   Get.offAllNamed(Routes.CHOOSELANGUAGE);
-    // });
-    // } else {
-    //   initializeApplication();
-    // }
+    existUser = await _repository.getExistingUserInLocal();
+
+    // on vas vers la page onboarding
+    if (!existUser) {
+      // delay pour attendre que la page splash s'affiche avant de continuer
+      Future.delayed(const Duration(seconds: 3), () {
+        Get.offAllNamed(Routes.CHOOSELANGUAGE);
+      });
+    } else {
+      Future.delayed(const Duration(seconds: 1), () {
+        initializeApplication();
+      });
+    }
   }
 
   Future<void> initializeApplication() async {
     pageError.value = false;
     loading.value = true;
 
-    // // // on vas vers la page de page d'accueil
+    // // on vas vers la page de page d'accueil
     // Map<String, dynamic> data = await AppProvider().getIdLocal();
     // var clientObjectId = data['clientObjectId'];
 
@@ -47,7 +48,7 @@ class SplashScreenController extends GetxController {
     // if (userDatabase == null) {
     //   pageError.value = true;
     // }
-    // //
+    //
     // else {
     //   gController.setUserData(UserModel.fromJson(userDatabase));
 
@@ -55,8 +56,8 @@ class SplashScreenController extends GetxController {
 
     //   gController.setBalanceClient(balanceClient);
 
-    //   Get.offAllNamed(Routes.CONNECTPAGE);
+    Get.offAllNamed(Routes.DASHBOARD);
     // }
-    // loading.value = false;
+    loading.value = false;
   }
 }

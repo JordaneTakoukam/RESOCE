@@ -38,7 +38,7 @@ class SplashScreenPage extends GetView<SplashScreenController> {
                             child: SizedBox(
                               width: isLandscape
                                   ? Get.width * .30
-                                  : Get.width * .85,
+                                  : Get.width * .8,
                               child: Image.asset(Chemin.logo.logo2),
                             ),
                           ),

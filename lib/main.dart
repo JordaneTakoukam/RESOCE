@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:resoce/core/functions/functions.dart';
 import 'package:resoce/core/theme/theme_app.dart';
+import 'package:resoce/data/db_local/_isare_local_db.dart';
 import 'package:resoce/data/providers/languages_providers.dart';
 import 'package:resoce/data/services/localazation/service_localazation.dart';
 import 'package:resoce/routes/app_pages.dart';
@@ -10,6 +11,7 @@ import 'package:resoce/routes/app_pages.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
+  await LocalDb.initializeLocalDB();
 
   enableRotation();
 
@@ -31,7 +33,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
 
       //
-      initialRoute: Routes.SIGNIN,
+      initialRoute: Routes.SPLASHSCREEN,
 
       // acceder a toutes les pages de l'app
       getPages: AppPages.pages,

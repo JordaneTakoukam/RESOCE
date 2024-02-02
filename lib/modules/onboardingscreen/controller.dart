@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:resoce/data/models/sliders_model.dart';
+import 'package:resoce/models/sliders_model.dart';
 import 'package:resoce/modules/onboardingscreen/repository.dart';
 
 class OnBoardingController extends GetxController {

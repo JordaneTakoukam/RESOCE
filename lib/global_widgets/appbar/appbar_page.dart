@@ -5,7 +5,7 @@ import 'package:resoce/core/paths/paths.dart';
 import 'package:resoce/global_widgets/buttons/button_icon_back.dart';
 import 'package:resoce/global_widgets/buttons/call_button.dart';
 
-PreferredSizeWidget appbarMessage() {
+PreferredSizeWidget appbarPage() {
   return AppBar(
     backgroundColor: Colors.white,
     toolbarHeight: Get.height * .075,
@@ -43,15 +43,14 @@ PreferredSizeWidget appbarMessage() {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-          
             ],
           ),
           const Spacer(),
 
           CallButton(onTap: () {}, isPhone: false),
-          SizedBox(width: Get.width *.01),
+          SizedBox(width: Get.width * .01),
           CallButton(onTap: () {}, isPhone: true),
-          SizedBox(width: Get.width *.02),
+          SizedBox(width: Get.width * .02),
         ],
       ),
     ),

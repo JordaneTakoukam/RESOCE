@@ -76,7 +76,7 @@ class ModelIconBottomBar extends GetView<DashboardController> {
               const Spacer(),
               Obx(
                 () => Text(
-                  capitalizeText(titre.tr),
+                  capitalizeText(cutWord(titre.tr, 11)),
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
                     fontSize: 12,

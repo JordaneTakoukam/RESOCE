@@ -77,4 +77,12 @@ colorSafeWhite() {
   );
 }
 
-// couleur defauth theme white
+// couper un mot 
+String cutWord(String word, int characterLimit) {
+  if (word.length <= characterLimit) {
+    return word;
+  } else {
+    return "${word.substring(0, characterLimit - 3)}...";
+  }
+}
+

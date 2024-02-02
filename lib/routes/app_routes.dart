@@ -14,4 +14,5 @@ abstract class Routes {
   static const String PIN = '/pin_de_deverouillage';
   static const String DASHBOARD = '/tablea-de-bord';
   static const String MESSAGE = '/PAGE_MESSAGE_DISCUSSION';
+  static const String CONTACTPAGE = '/PAGE_LIST_CLIENT';
 }
