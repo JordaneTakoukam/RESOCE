@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:resoce/core/functions/functions.dart';
-import 'package:resoce/core/paths/paths.dart';
 import 'package:resoce/global_widgets/buttons/button_icon_back.dart';
-import 'package:resoce/global_widgets/buttons/call_button.dart';
 
 PreferredSizeWidget appbarContactPage() {
+  const contacts = [];
   return AppBar(
     backgroundColor: Colors.white,
     toolbarHeight: Get.height * .075,
@@ -38,7 +36,7 @@ PreferredSizeWidget appbarContactPage() {
                 ),
               ),
               Text(
-                '15 contacts',
+                '${contacts.length} ${contacts.isEmpty ? 'contact' : 'contacts'}',
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: Get.width * .025,
@@ -50,7 +48,7 @@ PreferredSizeWidget appbarContactPage() {
           const Spacer(),
 
           IconButton(
-            tooltip: 'recherche',
+            tooltip: 'recherche'.tr,
             onPressed: () {},
             icon: const Icon(
               Icons.search,

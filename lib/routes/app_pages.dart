@@ -1,6 +1,7 @@
 import 'package:get/get_navigation/src/routes/transitions_type.dart';
 import 'package:resoce/modules/dashboard_page/chat/pages/message_page.dart';
 import 'package:resoce/modules/dashboard_page/chat/pages/contact_page.dart';
+import 'package:resoce/modules/dashboard_page/chat/pages/new_contact_page.dart';
 import 'package:resoce/modules/lanugage_choose/page.dart';
 import 'package:resoce/modules/dashboard_menu_page/binding.dart';
 import 'package:resoce/modules/dashboard_menu_page/menu_dashboard_page.dart';
@@ -63,6 +64,11 @@ abstract class AppPages {
     goTo(
       name: Routes.CONTACTPAGE,
       page: const ContactPage(),
+      transition: Transition.rightToLeft,
+    ),
+    goTo(
+      name: Routes.NEWCONTACT,
+      page: const NewContact(),
       transition: Transition.rightToLeft,
     ),
   ];

@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:resoce/core/paths/paths.dart';
 import 'package:resoce/core/colors/color_app.dart';
 import 'package:resoce/global_widgets/appbar/appbar_message.dart';
-import 'package:resoce/modules/dashboard_page/chat/controller/message_controller.dart';
+import 'package:resoce/modules/dashboard_page/chat/controllers/message_controller.dart';
 
 class MessagePage extends StatefulWidget {
   const MessagePage({Key? key}) : super(key: key);

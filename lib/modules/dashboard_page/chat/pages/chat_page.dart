@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:resoce/global_widgets/appbar/appbar_home.dart';
 import 'package:resoce/models/client.dart';
-import 'package:resoce/modules/dashboard_page/chat/controller/chat_controller.dart';
+import 'package:resoce/modules/dashboard_page/chat/controllers/chat_controller.dart';
 import 'package:resoce/modules/dashboard_page/chat/widgets/body_discussion.dart';
 import 'package:resoce/modules/dashboard_page/chat/widgets/new_chat_button.dart';
 

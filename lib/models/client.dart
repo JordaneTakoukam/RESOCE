@@ -51,6 +51,28 @@ class Client {
     required this.loginHistory,
   });
 
+  Client.empty()
+      : idApi = '',
+        username = '',
+        password = '',
+        email = '',
+        profilePicture = '',
+        onlineStatus = false,
+        lastOnlineDate = null,
+        createdByType = '',
+        createdByRole = '',
+        createdById = '',
+        activeSuspended = false,
+        activeSuspensionDurationInHours = null,
+        activeStartDate = null,
+        activeEndDate = null,
+        companyId = '',
+        role = '',
+        fonction = '',
+        loginId = '',
+        registrationDate = DateTime.now(),
+        loginHistory = const [];
+
   factory Client.fromJson(Map<String, dynamic> json) {
     return Client(
       idApi: json['_id'] ?? "",

@@ -15,4 +15,7 @@ abstract class Routes {
   static const String DASHBOARD = '/tablea-de-bord';
   static const String MESSAGE = '/PAGE_MESSAGE_DISCUSSION';
   static const String CONTACTPAGE = '/PAGE_LIST_CLIENT';
+  static const String NEWCONTACT = '/page-ajouter-nouveau-contact';
+
+  
 }
