@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:resoce/global_widgets/appbar/appbar_page.dart';
+import 'package:get/get.dart';
+import 'package:resoce/modules/dashboard_page/chat/widgets/app_contact.dart';
+import 'package:resoce/modules/dashboard_page/chat/widgets/bouton_nouveau_contact.dart';
 
 class ContactPage extends StatelessWidget {
   const ContactPage({super.key});
@@ -7,9 +9,12 @@ class ContactPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appbarPage(),
+      appBar: appbarContactPage(),
       body: ListView(
-        children: [],
+        padding: EdgeInsets.symmetric(vertical: Get.height *.008),
+        children: const [
+          BoutonNouveauContact(),
+        ],
       ),
     );
   }

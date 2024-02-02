@@ -43,6 +43,7 @@ class ICONES {
   String microphone = 'assets/icones/microphone.png';
   String paperPin = 'assets/icones/paper-pin.png';
   String write = 'assets/icones/write.png';
+  String newUser = 'assets/icones/new-user.png';
 }
 
 class LOTTIES {

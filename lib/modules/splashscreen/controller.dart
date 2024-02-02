@@ -27,7 +27,7 @@ class SplashScreenController extends GetxController {
         Get.offAllNamed(Routes.CHOOSELANGUAGE);
       });
     } else {
-      Future.delayed(const Duration(seconds: 1), () {
+      Future.delayed(const Duration(milliseconds: 1500), () {
         initializeApplication();
       });
     }
