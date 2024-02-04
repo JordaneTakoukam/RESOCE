@@ -24,7 +24,7 @@ class LogoAppbar extends StatelessWidget {
         Padding(
           padding: EdgeInsets.only(bottom: Get.height * .002),
           child: Text(
-            'business',
+            'Business',
             style: TextStyle(
               // color: const Color.fromARGB(255, 145, 144, 144),
               color: AppColors.primaryColor,

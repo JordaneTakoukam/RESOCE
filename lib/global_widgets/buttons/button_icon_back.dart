@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:resoce/core/colors/color_app.dart';
 
 class ButtonRetour extends StatelessWidget {
   const ButtonRetour({
@@ -33,8 +34,10 @@ class ButtonRetour extends StatelessWidget {
 }
 
 class ButtonRetourAuth extends StatelessWidget {
+  final Color iconeColor;
   const ButtonRetourAuth({
     Key? key,
+    this.iconeColor = Colors.black,
   }) : super(key: key);
 
   @override
@@ -48,13 +51,13 @@ class ButtonRetourAuth extends StatelessWidget {
           width: Get.width * .12,
           height: Get.width * .12,
           decoration: BoxDecoration(
-            color: Colors.grey.withOpacity(.15),
+            color: AppColors.primaryColor.withOpacity(.15),
             shape: BoxShape.circle,
           ),
           child: Center(
             child: Icon(
               Icons.arrow_back,
-              color: Colors.black,
+              color: iconeColor,
               size: Get.width * .05,
             ),
           ),

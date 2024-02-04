@@ -34,7 +34,7 @@ class SplashScreenPage extends GetView<SplashScreenController> {
                           // nom de l'app
                           DelayedDisplayWidget(
                             slidingBeginOffset: const Offset(0, 0),
-                            delay: const Duration(seconds: 1),
+                            delay: const Duration(milliseconds: 300),
                             child: SizedBox(
                               width: isLandscape
                                   ? Get.width * .30

@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:resoce/global_widgets/buttons/button_icon_back.dart';
-import 'package:resoce/modules/dashboard_page/chat/controllers/new_contact_controller.dart';
 
 PreferredSizeWidget appbarNewContact() {
-  var controller = Get.find<NewContactController>();
-
   return AppBar(
     backgroundColor: Colors.white,
     toolbarHeight: Get.height * .075,
@@ -37,28 +34,17 @@ PreferredSizeWidget appbarNewContact() {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              Obx(
-                () => Text(
-                  '${controller.client.value.companyId}',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: Get.width * .025,
-                    fontWeight: FontWeight.bold,
-                  ),
+              Text(
+                'De votre entreprise',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: Get.width * .025,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ],
           ),
           const Spacer(),
-
-          IconButton(
-            tooltip: 'recherche'.tr,
-            onPressed: () {},
-            icon: const Icon(
-              Icons.search,
-              color: Colors.black,
-            ),
-          ),
 
           IconButton(
             tooltip: 'Menu',

@@ -5,11 +5,10 @@ import 'package:get/get.dart';
 GetPage goTo({
   required String name,
   required Widget page,
-  int transitionDuration = 100,
+  int transitionDuration = 250,
   Bindings? binding,
   Transition transition = Transition.rightToLeft,
 }) {
-  
   return GetPage(
     name: name,
     page: () => page,

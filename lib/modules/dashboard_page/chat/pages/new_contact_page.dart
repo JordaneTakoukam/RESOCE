@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:resoce/core/colors/color_app.dart';
 import 'package:resoce/modules/dashboard_page/chat/controllers/new_contact_controller.dart';
 import 'package:resoce/modules/dashboard_page/chat/widgets/appbar/appbar_new_contact.dart';
 
@@ -15,6 +16,7 @@ class NewContact extends GetView<NewContactController> {
 
     return Scaffold(
       appBar: appbarNewContact(),
+      backgroundColor: AppColors.background,
       body: ListView(
         children: [],
       ),

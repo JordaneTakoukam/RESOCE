@@ -60,16 +60,19 @@ abstract class AppPages {
       name: Routes.MESSAGE,
       page: const MessagePage(),
       transition: Transition.rightToLeft,
+      transitionDuration: 300,
     ),
     goTo(
       name: Routes.CONTACTPAGE,
       page: const ContactPage(),
       transition: Transition.rightToLeft,
+      transitionDuration: 300,
     ),
     goTo(
       name: Routes.NEWCONTACT,
       page: const NewContact(),
       transition: Transition.rightToLeft,
+      transitionDuration: 300,
     ),
   ];
 }

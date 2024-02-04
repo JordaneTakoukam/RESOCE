@@ -17,7 +17,7 @@ class AppColors {
   static const Color iconColor = Color(0xFF34495E);
 
   static const Color darkGrey = Color(0xFFBFBFBF);
-  static const Color background = Color(0xFFF6F9FF);
+  static const Color background = Color.fromARGB(255, 248, 247, 247);
   static const Color backgroundDark = Color.fromARGB(255, 233, 230, 230);
 
 // click sur le bouton
