@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:resoce/core/colors/color_app.dart';
+import 'package:resoce/core/functions/functions.dart';
 
 class EmptyChatPage extends StatelessWidget {
   const EmptyChatPage({super.key});
@@ -11,7 +12,7 @@ class EmptyChatPage extends StatelessWidget {
       padding: EdgeInsets.all(Get.width * .1),
       child: Center(
         child: Text(
-          'Aucune discussions pour le moment',
+          capitalizeText('no_discussions'.tr),
           textAlign: TextAlign.center,
           style: TextStyle(
             color: AppColors.textGray,

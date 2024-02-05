@@ -23,4 +23,12 @@ final en = {
   'announcements': 'announcements',
   'pinned_messages': 'pinned messages',
   'all_messages': 'all messages',
+  // news 04-02-24
+  'no_discussions': 'no discussions at the moment',
+  'new_contact': 'new contact',
+  'contact_username': 'username of the contact',
+  'email_of': 'email of',
+  'function_in_the_company_of': 'function in the company of',
+  'privilege_in_the_application': 'privilege in the application',
+  'add': 'add',
 };

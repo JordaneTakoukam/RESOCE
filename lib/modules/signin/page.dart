@@ -1,5 +1,4 @@
 // ignore_for_file: empty_catches
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:resoce/core/functions/functions.dart';
@@ -8,7 +7,7 @@ import 'package:resoce/global_widgets/animations/delay_widget.dart';
 import 'package:resoce/global_widgets/buttons/button_flat.dart';
 import 'package:resoce/global_widgets/buttons/button_icon_back.dart';
 import 'package:resoce/global_widgets/formes/bezier_container.dart';
-import 'package:resoce/global_widgets/loader/loader.dart';
+import 'package:resoce/global_widgets/pages/loading_page.dart';
 import 'package:resoce/modules/signin/controller.dart';
 import 'package:resoce/modules/signin/widgets/id_input.dart';
 import 'package:resoce/modules/signin/widgets/password_input.dart';
@@ -123,18 +122,8 @@ class SignInPage extends GetView<SignInController> {
 
           //
 
-          Obx(
-            () => controller.pageLoading.value
-                ? Container(
-                    color: Colors.grey.withOpacity(.5),
-                    width: double.infinity,
-                    height: double.infinity,
-                    child: const Center(
-                      child: Loader(),
-                    ),
-                  )
-                : const SizedBox.shrink(),
-          ),
+          // page de loading
+          Obx(() => LoadingPage(pageLoading: controller.pageLoading.value)),
           Positioned(
             top: Get.height * .025,
             left: 0,

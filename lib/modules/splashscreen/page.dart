@@ -5,7 +5,7 @@ import 'package:resoce/core/functions/functions.dart';
 import 'package:resoce/core/paths/paths.dart';
 import 'package:resoce/core/colors/color_app.dart';
 import 'package:resoce/global_widgets/animations/delay_widget.dart';
-import 'package:resoce/global_widgets/error_page/error_page.dart';
+import 'package:resoce/global_widgets/pages/error_page.dart';
 import 'package:resoce/modules/splashscreen/controller.dart';
 
 class SplashScreenPage extends GetView<SplashScreenController> {

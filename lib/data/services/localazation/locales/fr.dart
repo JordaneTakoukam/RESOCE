@@ -23,4 +23,12 @@ const fr = {
   'announcements': 'annonces',
   "pinned_messages": "messages épinglés",
   "all_messages": "tous les messages",
+  // new
+  'no_discussions': "pas de discussions pour le moment",
+  'new_contact': "nouveau contact",
+  'contact_username': "nom d'utilisateur du contact",
+  'email_of': "email de",
+  'function_in_the_company_of': "fonction dans l'entreprise de",
+  'privilege_in_the_application': "privilège dans l'application",
+  'add': 'ajouter',
 };

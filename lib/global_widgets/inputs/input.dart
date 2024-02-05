@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:resoce/core/functions/functions.dart';
 import 'package:resoce/core/colors/color_app.dart';
 
-
 class InputTextAuth extends StatefulWidget {
   final String labelText;
   final TextInputType keyboardType;
@@ -18,6 +17,8 @@ class InputTextAuth extends StatefulWidget {
   final Widget prefixIcon;
   final dynamic focusNode;
   final bool considereMaj;
+  final String hintText;
+  final ValueChanged<String>? onChanged; // Nouveau paramètre
 
   const InputTextAuth({
     Key? key,
@@ -32,7 +33,9 @@ class InputTextAuth extends StatefulWidget {
     this.prefixIcon = const SizedBox(),
     this.prefix = false,
     this.focusNode,
-    this.considereMaj = true, // Ajout d'une valeur par défaut
+    this.hintText = '',
+    this.considereMaj = true,
+    this.onChanged,
   }) : super(key: key);
 
   @override
@@ -40,7 +43,6 @@ class InputTextAuth extends StatefulWidget {
 }
 
 class _InputTextAuthState extends State<InputTextAuth> {
-  bool showError = false;
   bool passwordVisible = false;
 
   @override
@@ -71,6 +73,11 @@ class _InputTextAuthState extends State<InputTextAuth> {
                 color: Colors.grey.shade600.withOpacity(.9),
                 fontSize: 16,
               ),
+              hintText: widget.hintText,
+              hintStyle: TextStyle(
+                color: Colors.grey.shade600.withOpacity(.9),
+                fontSize: 15,
+              ),
               contentPadding: const EdgeInsets.fromLTRB(2, 0, 16, 10),
               focusedBorder: const UnderlineInputBorder(
                 borderSide: BorderSide(
@@ -100,13 +107,10 @@ class _InputTextAuthState extends State<InputTextAuth> {
                     )
                   : null,
             ),
-            onChanged: (value) {
-              setState(() => showError = false);
-            },
+            onChanged: widget.onChanged,
             validator: (value) {
               return widget.validator(value ?? "");
-            }
-            ,
+            },
           ),
         ],
       ),

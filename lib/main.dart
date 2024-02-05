@@ -12,7 +12,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
   await LocalDb.initializeLocalDB();
-
   enableRotation();
 
   runApp(const MyApp());
@@ -23,6 +22,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    preChargeImageApp(context);
+
     // Création de l'instance du LanguageProvider
     final languageProvider = Get.put(LanguageProvider());
 

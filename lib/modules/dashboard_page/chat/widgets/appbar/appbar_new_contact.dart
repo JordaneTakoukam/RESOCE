@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:resoce/core/functions/functions.dart';
 import 'package:resoce/global_widgets/buttons/button_icon_back.dart';
 
 PreferredSizeWidget appbarNewContact() {
@@ -27,32 +28,14 @@ PreferredSizeWidget appbarNewContact() {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Nouveau contact',
+                capitalizeText('new_contact'.tr),
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: Get.width * .035,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              Text(
-                'De votre entreprise',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: Get.width * .025,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
             ],
-          ),
-          const Spacer(),
-
-          IconButton(
-            tooltip: 'Menu',
-            onPressed: () {},
-            icon: const Icon(
-              Icons.more_vert,
-              color: Colors.black,
-            ),
           ),
         ],
       ),

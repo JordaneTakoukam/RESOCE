@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:resoce/core/colors/color_app.dart';
+import 'package:resoce/core/functions/functions.dart';
 import 'package:resoce/core/paths/paths.dart';
 import 'package:resoce/routes/app_pages.dart';
 
@@ -37,7 +38,7 @@ class BoutonNouveauContact extends StatelessWidget {
               ),
               SizedBox(width: Get.width * .025),
               Text(
-                'Nouveau contact',
+                capitalizeText('new_contact'.tr),
                 style: TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.w600,

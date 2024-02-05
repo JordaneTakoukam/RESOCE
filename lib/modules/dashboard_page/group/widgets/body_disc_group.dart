@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:resoce/modules/dashboard_page/chat/controllers/chat_controller.dart';
-import 'package:resoce/modules/dashboard_page/chat/widgets/page/empty_chat.dart';
+import 'package:resoce/modules/dashboard_page/chat/widgets/widget_page/empty_chat.dart';
 import 'package:resoce/modules/dashboard_page/chat/widgets/title_msg.dart';
 import 'package:resoce/modules/dashboard_page/chat/widgets/widget_chat.dart';
 

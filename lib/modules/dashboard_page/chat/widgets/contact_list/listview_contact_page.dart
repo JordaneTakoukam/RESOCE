@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:resoce/core/colors/color_app.dart';
 import 'package:resoce/core/paths/paths.dart';
 import 'package:resoce/modules/dashboard_page/chat/controllers/contacts_controller.dart';
-import 'package:resoce/modules/dashboard_page/chat/widgets/contacts_page/contact_widget.dart';
+import 'package:resoce/modules/dashboard_page/chat/widgets/contact_list/contact_widget.dart';
 
 class ListViewContactPage extends GetView<ContactController> {
   const ListViewContactPage({super.key});
