@@ -37,45 +37,45 @@ const ClientSchema = CollectionSchema(
       name: r'activeSuspensionDurationInHours',
       type: IsarType.stringList,
     ),
-    r'companyId': PropertySchema(
+    r'blocked': PropertySchema(
       id: 4,
+      name: r'blocked',
+      type: IsarType.boolList,
+    ),
+    r'companyId': PropertySchema(
+      id: 5,
       name: r'companyId',
       type: IsarType.stringList,
     ),
     r'createdById': PropertySchema(
-      id: 5,
+      id: 6,
       name: r'createdById',
       type: IsarType.stringList,
     ),
     r'createdByRole': PropertySchema(
-      id: 6,
+      id: 7,
       name: r'createdByRole',
       type: IsarType.stringList,
     ),
     r'createdByType': PropertySchema(
-      id: 7,
+      id: 8,
       name: r'createdByType',
       type: IsarType.stringList,
     ),
     r'email': PropertySchema(
-      id: 8,
+      id: 9,
       name: r'email',
       type: IsarType.string,
     ),
     r'fonction': PropertySchema(
-      id: 9,
+      id: 10,
       name: r'fonction',
       type: IsarType.stringList,
     ),
     r'idApi': PropertySchema(
-      id: 10,
+      id: 11,
       name: r'idApi',
       type: IsarType.string,
-    ),
-    r'lastOnlineDate': PropertySchema(
-      id: 11,
-      name: r'lastOnlineDate',
-      type: IsarType.dateTime,
     ),
     r'loginHistory': PropertySchema(
       id: 12,
@@ -87,33 +87,28 @@ const ClientSchema = CollectionSchema(
       name: r'loginId',
       type: IsarType.string,
     ),
-    r'onlineStatus': PropertySchema(
-      id: 14,
-      name: r'onlineStatus',
-      type: IsarType.bool,
-    ),
     r'password': PropertySchema(
-      id: 15,
+      id: 14,
       name: r'password',
       type: IsarType.string,
     ),
     r'profilePicture': PropertySchema(
-      id: 16,
+      id: 15,
       name: r'profilePicture',
       type: IsarType.string,
     ),
     r'registrationDate': PropertySchema(
-      id: 17,
+      id: 16,
       name: r'registrationDate',
       type: IsarType.dateTime,
     ),
     r'role': PropertySchema(
-      id: 18,
+      id: 17,
       name: r'role',
       type: IsarType.stringList,
     ),
     r'username': PropertySchema(
-      id: 19,
+      id: 18,
       name: r'username',
       type: IsarType.string,
     )
@@ -150,6 +145,7 @@ int _clientEstimateSize(
       }
     }
   }
+  bytesCount += 3 + object.blocked.length;
   bytesCount += 3 + object.companyId.length * 3;
   {
     for (var i = 0; i < object.companyId.length; i++) {
@@ -212,22 +208,21 @@ void _clientSerialize(
   writer.writeDateTimeList(offsets[1], object.activeStartDate);
   writer.writeBoolList(offsets[2], object.activeSuspended);
   writer.writeStringList(offsets[3], object.activeSuspensionDurationInHours);
-  writer.writeStringList(offsets[4], object.companyId);
-  writer.writeStringList(offsets[5], object.createdById);
-  writer.writeStringList(offsets[6], object.createdByRole);
-  writer.writeStringList(offsets[7], object.createdByType);
-  writer.writeString(offsets[8], object.email);
-  writer.writeStringList(offsets[9], object.fonction);
-  writer.writeString(offsets[10], object.idApi);
-  writer.writeDateTime(offsets[11], object.lastOnlineDate);
+  writer.writeBoolList(offsets[4], object.blocked);
+  writer.writeStringList(offsets[5], object.companyId);
+  writer.writeStringList(offsets[6], object.createdById);
+  writer.writeStringList(offsets[7], object.createdByRole);
+  writer.writeStringList(offsets[8], object.createdByType);
+  writer.writeString(offsets[9], object.email);
+  writer.writeStringList(offsets[10], object.fonction);
+  writer.writeString(offsets[11], object.idApi);
   writer.writeDateTimeList(offsets[12], object.loginHistory);
   writer.writeString(offsets[13], object.loginId);
-  writer.writeBool(offsets[14], object.onlineStatus);
-  writer.writeString(offsets[15], object.password);
-  writer.writeString(offsets[16], object.profilePicture);
-  writer.writeDateTime(offsets[17], object.registrationDate);
-  writer.writeStringList(offsets[18], object.role);
-  writer.writeString(offsets[19], object.username);
+  writer.writeString(offsets[14], object.password);
+  writer.writeString(offsets[15], object.profilePicture);
+  writer.writeDateTime(offsets[16], object.registrationDate);
+  writer.writeStringList(offsets[17], object.role);
+  writer.writeString(offsets[18], object.username);
 }
 
 Client _clientDeserialize(
@@ -242,22 +237,21 @@ Client _clientDeserialize(
     activeSuspended: reader.readBoolList(offsets[2]) ?? [],
     activeSuspensionDurationInHours:
         reader.readStringOrNullList(offsets[3]) ?? [],
-    companyId: reader.readStringList(offsets[4]) ?? [],
-    createdById: reader.readStringList(offsets[5]) ?? [],
-    createdByRole: reader.readStringList(offsets[6]) ?? [],
-    createdByType: reader.readStringList(offsets[7]) ?? [],
-    email: reader.readString(offsets[8]),
-    fonction: reader.readStringList(offsets[9]) ?? [],
-    idApi: reader.readString(offsets[10]),
-    lastOnlineDate: reader.readDateTimeOrNull(offsets[11]),
+    blocked: reader.readBoolList(offsets[4]) ?? [],
+    companyId: reader.readStringList(offsets[5]) ?? [],
+    createdById: reader.readStringList(offsets[6]) ?? [],
+    createdByRole: reader.readStringList(offsets[7]) ?? [],
+    createdByType: reader.readStringList(offsets[8]) ?? [],
+    email: reader.readString(offsets[9]),
+    fonction: reader.readStringList(offsets[10]) ?? [],
+    idApi: reader.readString(offsets[11]),
     loginHistory: reader.readDateTimeList(offsets[12]) ?? [],
     loginId: reader.readString(offsets[13]),
-    onlineStatus: reader.readBool(offsets[14]),
-    password: reader.readString(offsets[15]),
-    profilePicture: reader.readString(offsets[16]),
-    registrationDate: reader.readDateTime(offsets[17]),
-    role: reader.readStringList(offsets[18]) ?? [],
-    username: reader.readString(offsets[19]),
+    password: reader.readString(offsets[14]),
+    profilePicture: reader.readString(offsets[15]),
+    registrationDate: reader.readDateTime(offsets[16]),
+    role: reader.readStringList(offsets[17]) ?? [],
+    username: reader.readString(offsets[18]),
   );
   object.id = id;
   return object;
@@ -279,7 +273,7 @@ P _clientDeserializeProp<P>(
     case 3:
       return (reader.readStringOrNullList(offset) ?? []) as P;
     case 4:
-      return (reader.readStringList(offset) ?? []) as P;
+      return (reader.readBoolList(offset) ?? []) as P;
     case 5:
       return (reader.readStringList(offset) ?? []) as P;
     case 6:
@@ -287,28 +281,26 @@ P _clientDeserializeProp<P>(
     case 7:
       return (reader.readStringList(offset) ?? []) as P;
     case 8:
-      return (reader.readString(offset)) as P;
-    case 9:
       return (reader.readStringList(offset) ?? []) as P;
-    case 10:
+    case 9:
       return (reader.readString(offset)) as P;
+    case 10:
+      return (reader.readStringList(offset) ?? []) as P;
     case 11:
-      return (reader.readDateTimeOrNull(offset)) as P;
+      return (reader.readString(offset)) as P;
     case 12:
       return (reader.readDateTimeList(offset) ?? []) as P;
     case 13:
       return (reader.readString(offset)) as P;
     case 14:
-      return (reader.readBool(offset)) as P;
+      return (reader.readString(offset)) as P;
     case 15:
       return (reader.readString(offset)) as P;
     case 16:
-      return (reader.readString(offset)) as P;
-    case 17:
       return (reader.readDateTime(offset)) as P;
-    case 18:
+    case 17:
       return (reader.readStringList(offset) ?? []) as P;
-    case 19:
+    case 18:
       return (reader.readString(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -1062,6 +1054,100 @@ extension ClientQueryFilter on QueryBuilder<Client, Client, QFilterCondition> {
     return QueryBuilder.apply(this, (query) {
       return query.listLength(
         r'activeSuspensionDurationInHours',
+        lower,
+        includeLower,
+        upper,
+        includeUpper,
+      );
+    });
+  }
+
+  QueryBuilder<Client, Client, QAfterFilterCondition> blockedElementEqualTo(
+      bool value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'blocked',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<Client, Client, QAfterFilterCondition> blockedLengthEqualTo(
+      int length) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'blocked',
+        length,
+        true,
+        length,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<Client, Client, QAfterFilterCondition> blockedIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'blocked',
+        0,
+        true,
+        0,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<Client, Client, QAfterFilterCondition> blockedIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'blocked',
+        0,
+        false,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<Client, Client, QAfterFilterCondition> blockedLengthLessThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'blocked',
+        0,
+        true,
+        length,
+        include,
+      );
+    });
+  }
+
+  QueryBuilder<Client, Client, QAfterFilterCondition> blockedLengthGreaterThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'blocked',
+        length,
+        include,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<Client, Client, QAfterFilterCondition> blockedLengthBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'blocked',
         lower,
         includeLower,
         upper,
@@ -2485,76 +2571,6 @@ extension ClientQueryFilter on QueryBuilder<Client, Client, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Client, Client, QAfterFilterCondition> lastOnlineDateIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'lastOnlineDate',
-      ));
-    });
-  }
-
-  QueryBuilder<Client, Client, QAfterFilterCondition>
-      lastOnlineDateIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'lastOnlineDate',
-      ));
-    });
-  }
-
-  QueryBuilder<Client, Client, QAfterFilterCondition> lastOnlineDateEqualTo(
-      DateTime? value) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'lastOnlineDate',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<Client, Client, QAfterFilterCondition> lastOnlineDateGreaterThan(
-    DateTime? value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'lastOnlineDate',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<Client, Client, QAfterFilterCondition> lastOnlineDateLessThan(
-    DateTime? value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'lastOnlineDate',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<Client, Client, QAfterFilterCondition> lastOnlineDateBetween(
-    DateTime? lower,
-    DateTime? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'lastOnlineDate',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-      ));
-    });
-  }
-
   QueryBuilder<Client, Client, QAfterFilterCondition>
       loginHistoryElementEqualTo(DateTime value) {
     return QueryBuilder.apply(this, (query) {
@@ -2823,16 +2839,6 @@ extension ClientQueryFilter on QueryBuilder<Client, Client, QFilterCondition> {
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'loginId',
         value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<Client, Client, QAfterFilterCondition> onlineStatusEqualTo(
-      bool value) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'onlineStatus',
-        value: value,
       ));
     });
   }
@@ -3526,18 +3532,6 @@ extension ClientQuerySortBy on QueryBuilder<Client, Client, QSortBy> {
     });
   }
 
-  QueryBuilder<Client, Client, QAfterSortBy> sortByLastOnlineDate() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'lastOnlineDate', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Client, Client, QAfterSortBy> sortByLastOnlineDateDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'lastOnlineDate', Sort.desc);
-    });
-  }
-
   QueryBuilder<Client, Client, QAfterSortBy> sortByLoginId() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'loginId', Sort.asc);
@@ -3547,18 +3541,6 @@ extension ClientQuerySortBy on QueryBuilder<Client, Client, QSortBy> {
   QueryBuilder<Client, Client, QAfterSortBy> sortByLoginIdDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'loginId', Sort.desc);
-    });
-  }
-
-  QueryBuilder<Client, Client, QAfterSortBy> sortByOnlineStatus() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'onlineStatus', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Client, Client, QAfterSortBy> sortByOnlineStatusDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'onlineStatus', Sort.desc);
     });
   }
 
@@ -3648,18 +3630,6 @@ extension ClientQuerySortThenBy on QueryBuilder<Client, Client, QSortThenBy> {
     });
   }
 
-  QueryBuilder<Client, Client, QAfterSortBy> thenByLastOnlineDate() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'lastOnlineDate', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Client, Client, QAfterSortBy> thenByLastOnlineDateDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'lastOnlineDate', Sort.desc);
-    });
-  }
-
   QueryBuilder<Client, Client, QAfterSortBy> thenByLoginId() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'loginId', Sort.asc);
@@ -3669,18 +3639,6 @@ extension ClientQuerySortThenBy on QueryBuilder<Client, Client, QSortThenBy> {
   QueryBuilder<Client, Client, QAfterSortBy> thenByLoginIdDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'loginId', Sort.desc);
-    });
-  }
-
-  QueryBuilder<Client, Client, QAfterSortBy> thenByOnlineStatus() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'onlineStatus', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Client, Client, QAfterSortBy> thenByOnlineStatusDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'onlineStatus', Sort.desc);
     });
   }
 
@@ -3759,6 +3717,12 @@ extension ClientQueryWhereDistinct on QueryBuilder<Client, Client, QDistinct> {
     });
   }
 
+  QueryBuilder<Client, Client, QDistinct> distinctByBlocked() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'blocked');
+    });
+  }
+
   QueryBuilder<Client, Client, QDistinct> distinctByCompanyId() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'companyId');
@@ -3803,12 +3767,6 @@ extension ClientQueryWhereDistinct on QueryBuilder<Client, Client, QDistinct> {
     });
   }
 
-  QueryBuilder<Client, Client, QDistinct> distinctByLastOnlineDate() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'lastOnlineDate');
-    });
-  }
-
   QueryBuilder<Client, Client, QDistinct> distinctByLoginHistory() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'loginHistory');
@@ -3819,12 +3777,6 @@ extension ClientQueryWhereDistinct on QueryBuilder<Client, Client, QDistinct> {
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'loginId', caseSensitive: caseSensitive);
-    });
-  }
-
-  QueryBuilder<Client, Client, QDistinct> distinctByOnlineStatus() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'onlineStatus');
     });
   }
 
@@ -3897,6 +3849,12 @@ extension ClientQueryProperty on QueryBuilder<Client, Client, QQueryProperty> {
     });
   }
 
+  QueryBuilder<Client, List<bool>, QQueryOperations> blockedProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'blocked');
+    });
+  }
+
   QueryBuilder<Client, List<String>, QQueryOperations> companyIdProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'companyId');
@@ -3939,12 +3897,6 @@ extension ClientQueryProperty on QueryBuilder<Client, Client, QQueryProperty> {
     });
   }
 
-  QueryBuilder<Client, DateTime?, QQueryOperations> lastOnlineDateProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'lastOnlineDate');
-    });
-  }
-
   QueryBuilder<Client, List<DateTime>, QQueryOperations>
       loginHistoryProperty() {
     return QueryBuilder.apply(this, (query) {
@@ -3955,12 +3907,6 @@ extension ClientQueryProperty on QueryBuilder<Client, Client, QQueryProperty> {
   QueryBuilder<Client, String, QQueryOperations> loginIdProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'loginId');
-    });
-  }
-
-  QueryBuilder<Client, bool, QQueryOperations> onlineStatusProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'onlineStatus');
     });
   }
 

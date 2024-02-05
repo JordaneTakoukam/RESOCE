@@ -17,7 +17,7 @@ class ContactController extends GetxController {
   }
 
   Future getContactList() async {
-    // get contact list form local database
+   // get contact list form local database
     List<Contact> listDbContact = await LocalDb.getContacts();
     contactList.value = List<Contact>.from(listDbContact);
 

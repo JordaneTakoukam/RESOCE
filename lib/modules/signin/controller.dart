@@ -1,4 +1,4 @@
-// ignore_for_file: empty_catches
+// ignore_for_file: empty_catches, unnecessary_brace_in_string_interps
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -63,6 +63,7 @@ class SignInController extends GetxController {
       // verifie  si les donnees recu de l'api existe
       if (result['data'] != null) {
         clientModel = Client.fromJson(result['data']['data']);
+
         token = result['data']['token'];
 
         // sauvegarder le token de facon securiser en local
@@ -74,7 +75,7 @@ class SignInController extends GetxController {
         // ON REDIREIGe vers la page principale
         Get.offAndToNamed(Routes.DASHBOARD);
       } else {
-        pageLoading.value = false;
+        print('message derreur : ');
         return result['message'][langue];
       }
 
@@ -82,6 +83,8 @@ class SignInController extends GetxController {
 
       //
     } catch (e) {
+      print('message derreur : ${e}');
+
       pageLoading.value = false;
     }
     return '';

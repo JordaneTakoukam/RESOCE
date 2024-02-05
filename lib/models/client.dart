@@ -12,8 +12,6 @@ class Client {
   final String password;
   final String email;
   final String profilePicture;
-  final bool onlineStatus;
-  final DateTime? lastOnlineDate;
   final List<String> createdByType;
   final List<String> createdByRole;
   final List<String> createdById;
@@ -27,6 +25,7 @@ class Client {
   final String loginId;
   final DateTime registrationDate;
   final List<DateTime> loginHistory;
+  final List<bool> blocked;
 
   Client({
     required this.idApi,
@@ -34,8 +33,6 @@ class Client {
     required this.password,
     required this.email,
     required this.profilePicture,
-    required this.onlineStatus,
-    required this.lastOnlineDate,
     required this.createdByType,
     required this.createdByRole,
     required this.createdById,
@@ -49,6 +46,7 @@ class Client {
     required this.loginId,
     required this.registrationDate,
     required this.loginHistory,
+    required this.blocked,
   });
 
   Client.empty()
@@ -57,8 +55,6 @@ class Client {
         password = '',
         email = '',
         profilePicture = '',
-        onlineStatus = false,
-        lastOnlineDate = null,
         createdByType = [],
         createdByRole = [],
         createdById = [],
@@ -71,10 +67,15 @@ class Client {
         fonction = [],
         loginId = '',
         registrationDate = DateTime.now(),
+        blocked = [],
         loginHistory = const [];
 
   factory Client.fromJson(Map<String, dynamic> json) {
-    List<Map<String, dynamic>> companyInfos = json['companyInfos'];
+    List<Map<String, dynamic>> companyInfos = [];
+    if (json['companyInfos'] is List) {
+      companyInfos =
+          (json['companyInfos'] as List).cast<Map<String, dynamic>>();
+    }
 
     List<Map<String, dynamic>> createdByList = companyInfos
         .map((info) => info['createdBy'] ?? {})
@@ -92,10 +93,6 @@ class Client {
       password: json['profile']['password'] ?? "",
       email: json['profile']['email'] ?? "",
       profilePicture: json['profile']['profilePicture'] ?? "",
-      onlineStatus: json['online']['status'] ?? false,
-      lastOnlineDate: json['online']['lastOnlineDate'] != null
-          ? DateTime.parse(json['online']['lastOnlineDate'])
-          : null,
       createdByType:
           createdByList.map((info) => info['type'] as String).toList(),
       createdByRole:
@@ -103,6 +100,7 @@ class Client {
       createdById: createdByList.map((info) => info['id'] as String).toList(),
       activeSuspended:
           activeList.map((info) => info['suspended'] as bool).toList(),
+      blocked: activeList.map((info) => info['blocked'] as bool).toList(),
       activeSuspensionDurationInHours: activeList
           .map((info) => info['suspensionDurationInHours'] as String)
           .toList(),

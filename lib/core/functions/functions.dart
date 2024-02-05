@@ -91,17 +91,21 @@ String cutWord(String word, int characterLimit) {
 
 // precharger les images statiques de l'applications
 void preChargeImageApp(BuildContext context) async {
-  precacheImage(AssetImage(Chemin.logo.logo2), context);
-  precacheImage(AssetImage(Chemin.icone.chatFlat), context);
-  precacheImage(AssetImage(Chemin.icone.chatOutline), context);
-  precacheImage(AssetImage(Chemin.icone.groupFlat), context);
-  precacheImage(AssetImage(Chemin.icone.groupOutline), context);
-  precacheImage(AssetImage(Chemin.icone.avatar), context);
-  precacheImage(AssetImage(Chemin.icone.callFlat), context);
-  precacheImage(AssetImage(Chemin.icone.callOutline), context);
-  precacheImage(AssetImage(Chemin.icone.annonceFlat), context);
-  precacheImage(AssetImage(Chemin.icone.anonceOutline), context);
-  precacheImage(AssetImage(Chemin.icone.settingFlat), context);
-  precacheImage(AssetImage(Chemin.icone.settingOutline), context);
-  precacheImage(AssetImage(Chemin.icone.newUser), context);
+  try {
+    precacheImage(AssetImage(Chemin.logo.logo2), context);
+    precacheImage(AssetImage(Chemin.icone.chatFlat), context);
+    precacheImage(AssetImage(Chemin.icone.chatOutline), context);
+    precacheImage(AssetImage(Chemin.icone.groupFlat), context);
+    precacheImage(AssetImage(Chemin.icone.groupOutline), context);
+    precacheImage(AssetImage(Chemin.icone.avatar), context);
+    precacheImage(AssetImage(Chemin.icone.callFlat), context);
+    precacheImage(AssetImage(Chemin.icone.callOutline), context);
+    precacheImage(AssetImage(Chemin.icone.annonceFlat), context);
+    precacheImage(AssetImage(Chemin.icone.anonceOutline), context);
+    precacheImage(AssetImage(Chemin.icone.settingFlat), context);
+    precacheImage(AssetImage(Chemin.icone.settingOutline), context);
+    precacheImage(AssetImage(Chemin.icone.newUser), context);
+  } catch (e) {
+    print('Erreur prechargement : $e');
+  }
 }
