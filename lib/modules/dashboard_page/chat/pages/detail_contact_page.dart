@@ -41,7 +41,7 @@ class DetailContactPage extends StatelessWidget {
             ),
             SizedBox(height: Get.height * .02),
             Text(
-              capitalizeText(contact.fonction),
+              capitalizeText(contact.email),
               style: TextStyle(
                 color: AppColors.primaryColor.withOpacity(.7),
                 fontSize: Get.width * .035,

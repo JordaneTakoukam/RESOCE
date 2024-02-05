@@ -20,62 +20,62 @@ const ContactSchema = CollectionSchema(
     r'activeEndDate': PropertySchema(
       id: 0,
       name: r'activeEndDate',
-      type: IsarType.dateTime,
+      type: IsarType.dateTimeList,
     ),
     r'activeStartDate': PropertySchema(
       id: 1,
       name: r'activeStartDate',
-      type: IsarType.dateTime,
+      type: IsarType.dateTimeList,
     ),
     r'activeSuspended': PropertySchema(
       id: 2,
       name: r'activeSuspended',
-      type: IsarType.bool,
+      type: IsarType.boolList,
     ),
     r'activeSuspensionDurationInHours': PropertySchema(
       id: 3,
       name: r'activeSuspensionDurationInHours',
-      type: IsarType.long,
+      type: IsarType.stringList,
+    ),
+    r'blocked': PropertySchema(
+      id: 4,
+      name: r'blocked',
+      type: IsarType.boolList,
     ),
     r'companyId': PropertySchema(
-      id: 4,
+      id: 5,
       name: r'companyId',
-      type: IsarType.string,
+      type: IsarType.stringList,
     ),
     r'createdById': PropertySchema(
-      id: 5,
+      id: 6,
       name: r'createdById',
-      type: IsarType.string,
+      type: IsarType.stringList,
     ),
     r'createdByRole': PropertySchema(
-      id: 6,
+      id: 7,
       name: r'createdByRole',
-      type: IsarType.string,
+      type: IsarType.stringList,
     ),
     r'createdByType': PropertySchema(
-      id: 7,
+      id: 8,
       name: r'createdByType',
-      type: IsarType.string,
+      type: IsarType.stringList,
     ),
     r'email': PropertySchema(
-      id: 8,
+      id: 9,
       name: r'email',
       type: IsarType.string,
     ),
     r'fonction': PropertySchema(
-      id: 9,
+      id: 10,
       name: r'fonction',
-      type: IsarType.string,
+      type: IsarType.stringList,
     ),
     r'idApi': PropertySchema(
-      id: 10,
+      id: 11,
       name: r'idApi',
       type: IsarType.string,
-    ),
-    r'lastOnlineDate': PropertySchema(
-      id: 11,
-      name: r'lastOnlineDate',
-      type: IsarType.dateTime,
     ),
     r'loginHistory': PropertySchema(
       id: 12,
@@ -87,33 +87,28 @@ const ContactSchema = CollectionSchema(
       name: r'loginId',
       type: IsarType.string,
     ),
-    r'onlineStatus': PropertySchema(
-      id: 14,
-      name: r'onlineStatus',
-      type: IsarType.bool,
-    ),
     r'password': PropertySchema(
-      id: 15,
+      id: 14,
       name: r'password',
       type: IsarType.string,
     ),
     r'profilePicture': PropertySchema(
-      id: 16,
+      id: 15,
       name: r'profilePicture',
       type: IsarType.string,
     ),
     r'registrationDate': PropertySchema(
-      id: 17,
+      id: 16,
       name: r'registrationDate',
       type: IsarType.dateTime,
     ),
     r'role': PropertySchema(
-      id: 18,
+      id: 17,
       name: r'role',
-      type: IsarType.string,
+      type: IsarType.stringList,
     ),
     r'username': PropertySchema(
-      id: 19,
+      id: 18,
       name: r'username',
       type: IsarType.string,
     )
@@ -138,18 +133,67 @@ int _contactEstimateSize(
   Map<Type, List<int>> allOffsets,
 ) {
   var bytesCount = offsets.last;
+  bytesCount += 3 + object.activeEndDate.length * 8;
+  bytesCount += 3 + object.activeStartDate.length * 8;
+  bytesCount += 3 + object.activeSuspended.length;
+  bytesCount += 3 + object.activeSuspensionDurationInHours.length * 3;
+  {
+    for (var i = 0; i < object.activeSuspensionDurationInHours.length; i++) {
+      final value = object.activeSuspensionDurationInHours[i];
+      if (value != null) {
+        bytesCount += value.length * 3;
+      }
+    }
+  }
+  bytesCount += 3 + object.blocked.length;
   bytesCount += 3 + object.companyId.length * 3;
+  {
+    for (var i = 0; i < object.companyId.length; i++) {
+      final value = object.companyId[i];
+      bytesCount += value.length * 3;
+    }
+  }
   bytesCount += 3 + object.createdById.length * 3;
+  {
+    for (var i = 0; i < object.createdById.length; i++) {
+      final value = object.createdById[i];
+      bytesCount += value.length * 3;
+    }
+  }
   bytesCount += 3 + object.createdByRole.length * 3;
+  {
+    for (var i = 0; i < object.createdByRole.length; i++) {
+      final value = object.createdByRole[i];
+      bytesCount += value.length * 3;
+    }
+  }
   bytesCount += 3 + object.createdByType.length * 3;
+  {
+    for (var i = 0; i < object.createdByType.length; i++) {
+      final value = object.createdByType[i];
+      bytesCount += value.length * 3;
+    }
+  }
   bytesCount += 3 + object.email.length * 3;
   bytesCount += 3 + object.fonction.length * 3;
+  {
+    for (var i = 0; i < object.fonction.length; i++) {
+      final value = object.fonction[i];
+      bytesCount += value.length * 3;
+    }
+  }
   bytesCount += 3 + object.idApi.length * 3;
   bytesCount += 3 + object.loginHistory.length * 8;
   bytesCount += 3 + object.loginId.length * 3;
   bytesCount += 3 + object.password.length * 3;
   bytesCount += 3 + object.profilePicture.length * 3;
   bytesCount += 3 + object.role.length * 3;
+  {
+    for (var i = 0; i < object.role.length; i++) {
+      final value = object.role[i];
+      bytesCount += value.length * 3;
+    }
+  }
   bytesCount += 3 + object.username.length * 3;
   return bytesCount;
 }
@@ -160,26 +204,25 @@ void _contactSerialize(
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  writer.writeDateTime(offsets[0], object.activeEndDate);
-  writer.writeDateTime(offsets[1], object.activeStartDate);
-  writer.writeBool(offsets[2], object.activeSuspended);
-  writer.writeLong(offsets[3], object.activeSuspensionDurationInHours);
-  writer.writeString(offsets[4], object.companyId);
-  writer.writeString(offsets[5], object.createdById);
-  writer.writeString(offsets[6], object.createdByRole);
-  writer.writeString(offsets[7], object.createdByType);
-  writer.writeString(offsets[8], object.email);
-  writer.writeString(offsets[9], object.fonction);
-  writer.writeString(offsets[10], object.idApi);
-  writer.writeDateTime(offsets[11], object.lastOnlineDate);
+  writer.writeDateTimeList(offsets[0], object.activeEndDate);
+  writer.writeDateTimeList(offsets[1], object.activeStartDate);
+  writer.writeBoolList(offsets[2], object.activeSuspended);
+  writer.writeStringList(offsets[3], object.activeSuspensionDurationInHours);
+  writer.writeBoolList(offsets[4], object.blocked);
+  writer.writeStringList(offsets[5], object.companyId);
+  writer.writeStringList(offsets[6], object.createdById);
+  writer.writeStringList(offsets[7], object.createdByRole);
+  writer.writeStringList(offsets[8], object.createdByType);
+  writer.writeString(offsets[9], object.email);
+  writer.writeStringList(offsets[10], object.fonction);
+  writer.writeString(offsets[11], object.idApi);
   writer.writeDateTimeList(offsets[12], object.loginHistory);
   writer.writeString(offsets[13], object.loginId);
-  writer.writeBool(offsets[14], object.onlineStatus);
-  writer.writeString(offsets[15], object.password);
-  writer.writeString(offsets[16], object.profilePicture);
-  writer.writeDateTime(offsets[17], object.registrationDate);
-  writer.writeString(offsets[18], object.role);
-  writer.writeString(offsets[19], object.username);
+  writer.writeString(offsets[14], object.password);
+  writer.writeString(offsets[15], object.profilePicture);
+  writer.writeDateTime(offsets[16], object.registrationDate);
+  writer.writeStringList(offsets[17], object.role);
+  writer.writeString(offsets[18], object.username);
 }
 
 Contact _contactDeserialize(
@@ -189,26 +232,26 @@ Contact _contactDeserialize(
   Map<Type, List<int>> allOffsets,
 ) {
   final object = Contact(
-    activeEndDate: reader.readDateTimeOrNull(offsets[0]),
-    activeStartDate: reader.readDateTimeOrNull(offsets[1]),
-    activeSuspended: reader.readBool(offsets[2]),
-    activeSuspensionDurationInHours: reader.readLongOrNull(offsets[3]),
-    companyId: reader.readString(offsets[4]),
-    createdById: reader.readString(offsets[5]),
-    createdByRole: reader.readString(offsets[6]),
-    createdByType: reader.readString(offsets[7]),
-    email: reader.readString(offsets[8]),
-    fonction: reader.readString(offsets[9]),
-    idApi: reader.readString(offsets[10]),
-    lastOnlineDate: reader.readDateTimeOrNull(offsets[11]),
+    activeEndDate: reader.readDateTimeOrNullList(offsets[0]) ?? [],
+    activeStartDate: reader.readDateTimeOrNullList(offsets[1]) ?? [],
+    activeSuspended: reader.readBoolList(offsets[2]) ?? [],
+    activeSuspensionDurationInHours:
+        reader.readStringOrNullList(offsets[3]) ?? [],
+    blocked: reader.readBoolList(offsets[4]) ?? [],
+    companyId: reader.readStringList(offsets[5]) ?? [],
+    createdById: reader.readStringList(offsets[6]) ?? [],
+    createdByRole: reader.readStringList(offsets[7]) ?? [],
+    createdByType: reader.readStringList(offsets[8]) ?? [],
+    email: reader.readString(offsets[9]),
+    fonction: reader.readStringList(offsets[10]) ?? [],
+    idApi: reader.readString(offsets[11]),
     loginHistory: reader.readDateTimeList(offsets[12]) ?? [],
     loginId: reader.readString(offsets[13]),
-    onlineStatus: reader.readBool(offsets[14]),
-    password: reader.readString(offsets[15]),
-    profilePicture: reader.readString(offsets[16]),
-    registrationDate: reader.readDateTime(offsets[17]),
-    role: reader.readString(offsets[18]),
-    username: reader.readString(offsets[19]),
+    password: reader.readString(offsets[14]),
+    profilePicture: reader.readString(offsets[15]),
+    registrationDate: reader.readDateTime(offsets[16]),
+    role: reader.readStringList(offsets[17]) ?? [],
+    username: reader.readString(offsets[18]),
   );
   object.id = id;
   return object;
@@ -222,44 +265,42 @@ P _contactDeserializeProp<P>(
 ) {
   switch (propertyId) {
     case 0:
-      return (reader.readDateTimeOrNull(offset)) as P;
+      return (reader.readDateTimeOrNullList(offset) ?? []) as P;
     case 1:
-      return (reader.readDateTimeOrNull(offset)) as P;
+      return (reader.readDateTimeOrNullList(offset) ?? []) as P;
     case 2:
-      return (reader.readBool(offset)) as P;
+      return (reader.readBoolList(offset) ?? []) as P;
     case 3:
-      return (reader.readLongOrNull(offset)) as P;
+      return (reader.readStringOrNullList(offset) ?? []) as P;
     case 4:
-      return (reader.readString(offset)) as P;
+      return (reader.readBoolList(offset) ?? []) as P;
     case 5:
-      return (reader.readString(offset)) as P;
+      return (reader.readStringList(offset) ?? []) as P;
     case 6:
-      return (reader.readString(offset)) as P;
+      return (reader.readStringList(offset) ?? []) as P;
     case 7:
-      return (reader.readString(offset)) as P;
+      return (reader.readStringList(offset) ?? []) as P;
     case 8:
-      return (reader.readString(offset)) as P;
+      return (reader.readStringList(offset) ?? []) as P;
     case 9:
       return (reader.readString(offset)) as P;
     case 10:
-      return (reader.readString(offset)) as P;
+      return (reader.readStringList(offset) ?? []) as P;
     case 11:
-      return (reader.readDateTimeOrNull(offset)) as P;
+      return (reader.readString(offset)) as P;
     case 12:
       return (reader.readDateTimeList(offset) ?? []) as P;
     case 13:
       return (reader.readString(offset)) as P;
     case 14:
-      return (reader.readBool(offset)) as P;
+      return (reader.readString(offset)) as P;
     case 15:
       return (reader.readString(offset)) as P;
     case 16:
-      return (reader.readString(offset)) as P;
-    case 17:
       return (reader.readDateTime(offset)) as P;
+    case 17:
+      return (reader.readStringList(offset) ?? []) as P;
     case 18:
-      return (reader.readString(offset)) as P;
-    case 19:
       return (reader.readString(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -355,25 +396,26 @@ extension ContactQueryWhere on QueryBuilder<Contact, Contact, QWhereClause> {
 
 extension ContactQueryFilter
     on QueryBuilder<Contact, Contact, QFilterCondition> {
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> activeEndDateIsNull() {
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      activeEndDateElementIsNull() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
+      return query.addFilterCondition(const FilterCondition.elementIsNull(
         property: r'activeEndDate',
       ));
     });
   }
 
   QueryBuilder<Contact, Contact, QAfterFilterCondition>
-      activeEndDateIsNotNull() {
+      activeEndDateElementIsNotNull() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
+      return query.addFilterCondition(const FilterCondition.elementIsNotNull(
         property: r'activeEndDate',
       ));
     });
   }
 
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> activeEndDateEqualTo(
-      DateTime? value) {
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      activeEndDateElementEqualTo(DateTime? value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'activeEndDate',
@@ -383,7 +425,7 @@ extension ContactQueryFilter
   }
 
   QueryBuilder<Contact, Contact, QAfterFilterCondition>
-      activeEndDateGreaterThan(
+      activeEndDateElementGreaterThan(
     DateTime? value, {
     bool include = false,
   }) {
@@ -396,7 +438,8 @@ extension ContactQueryFilter
     });
   }
 
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> activeEndDateLessThan(
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      activeEndDateElementLessThan(
     DateTime? value, {
     bool include = false,
   }) {
@@ -409,7 +452,8 @@ extension ContactQueryFilter
     });
   }
 
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> activeEndDateBetween(
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      activeEndDateElementBetween(
     DateTime? lower,
     DateTime? upper, {
     bool includeLower = true,
@@ -427,25 +471,113 @@ extension ContactQueryFilter
   }
 
   QueryBuilder<Contact, Contact, QAfterFilterCondition>
-      activeStartDateIsNull() {
+      activeEndDateLengthEqualTo(int length) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
+      return query.listLength(
+        r'activeEndDate',
+        length,
+        true,
+        length,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition> activeEndDateIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'activeEndDate',
+        0,
+        true,
+        0,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      activeEndDateIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'activeEndDate',
+        0,
+        false,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      activeEndDateLengthLessThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'activeEndDate',
+        0,
+        true,
+        length,
+        include,
+      );
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      activeEndDateLengthGreaterThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'activeEndDate',
+        length,
+        include,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      activeEndDateLengthBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'activeEndDate',
+        lower,
+        includeLower,
+        upper,
+        includeUpper,
+      );
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      activeStartDateElementIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.elementIsNull(
         property: r'activeStartDate',
       ));
     });
   }
 
   QueryBuilder<Contact, Contact, QAfterFilterCondition>
-      activeStartDateIsNotNull() {
+      activeStartDateElementIsNotNull() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
+      return query.addFilterCondition(const FilterCondition.elementIsNotNull(
         property: r'activeStartDate',
       ));
     });
   }
 
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> activeStartDateEqualTo(
-      DateTime? value) {
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      activeStartDateElementEqualTo(DateTime? value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'activeStartDate',
@@ -455,7 +587,7 @@ extension ContactQueryFilter
   }
 
   QueryBuilder<Contact, Contact, QAfterFilterCondition>
-      activeStartDateGreaterThan(
+      activeStartDateElementGreaterThan(
     DateTime? value, {
     bool include = false,
   }) {
@@ -468,7 +600,8 @@ extension ContactQueryFilter
     });
   }
 
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> activeStartDateLessThan(
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      activeStartDateElementLessThan(
     DateTime? value, {
     bool include = false,
   }) {
@@ -481,7 +614,8 @@ extension ContactQueryFilter
     });
   }
 
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> activeStartDateBetween(
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      activeStartDateElementBetween(
     DateTime? lower,
     DateTime? upper, {
     bool includeLower = true,
@@ -498,8 +632,97 @@ extension ContactQueryFilter
     });
   }
 
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> activeSuspendedEqualTo(
-      bool value) {
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      activeStartDateLengthEqualTo(int length) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'activeStartDate',
+        length,
+        true,
+        length,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      activeStartDateIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'activeStartDate',
+        0,
+        true,
+        0,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      activeStartDateIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'activeStartDate',
+        0,
+        false,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      activeStartDateLengthLessThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'activeStartDate',
+        0,
+        true,
+        length,
+        include,
+      );
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      activeStartDateLengthGreaterThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'activeStartDate',
+        length,
+        include,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      activeStartDateLengthBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'activeStartDate',
+        lower,
+        includeLower,
+        upper,
+        includeUpper,
+      );
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      activeSuspendedElementEqualTo(bool value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'activeSuspended',
@@ -509,67 +732,165 @@ extension ContactQueryFilter
   }
 
   QueryBuilder<Contact, Contact, QAfterFilterCondition>
-      activeSuspensionDurationInHoursIsNull() {
+      activeSuspendedLengthEqualTo(int length) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
+      return query.listLength(
+        r'activeSuspended',
+        length,
+        true,
+        length,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      activeSuspendedIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'activeSuspended',
+        0,
+        true,
+        0,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      activeSuspendedIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'activeSuspended',
+        0,
+        false,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      activeSuspendedLengthLessThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'activeSuspended',
+        0,
+        true,
+        length,
+        include,
+      );
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      activeSuspendedLengthGreaterThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'activeSuspended',
+        length,
+        include,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      activeSuspendedLengthBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'activeSuspended',
+        lower,
+        includeLower,
+        upper,
+        includeUpper,
+      );
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      activeSuspensionDurationInHoursElementIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.elementIsNull(
         property: r'activeSuspensionDurationInHours',
       ));
     });
   }
 
   QueryBuilder<Contact, Contact, QAfterFilterCondition>
-      activeSuspensionDurationInHoursIsNotNull() {
+      activeSuspensionDurationInHoursElementIsNotNull() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
+      return query.addFilterCondition(const FilterCondition.elementIsNotNull(
         property: r'activeSuspensionDurationInHours',
       ));
     });
   }
 
   QueryBuilder<Contact, Contact, QAfterFilterCondition>
-      activeSuspensionDurationInHoursEqualTo(int? value) {
+      activeSuspensionDurationInHoursElementEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'activeSuspensionDurationInHours',
         value: value,
+        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<Contact, Contact, QAfterFilterCondition>
-      activeSuspensionDurationInHoursGreaterThan(
-    int? value, {
+      activeSuspensionDurationInHoursElementGreaterThan(
+    String? value, {
     bool include = false,
+    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
         property: r'activeSuspensionDurationInHours',
         value: value,
+        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<Contact, Contact, QAfterFilterCondition>
-      activeSuspensionDurationInHoursLessThan(
-    int? value, {
+      activeSuspensionDurationInHoursElementLessThan(
+    String? value, {
     bool include = false,
+    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
         property: r'activeSuspensionDurationInHours',
         value: value,
+        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<Contact, Contact, QAfterFilterCondition>
-      activeSuspensionDurationInHoursBetween(
-    int? lower,
-    int? upper, {
+      activeSuspensionDurationInHoursElementBetween(
+    String? lower,
+    String? upper, {
     bool includeLower = true,
     bool includeUpper = true,
+    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
@@ -578,11 +899,268 @@ extension ContactQueryFilter
         includeLower: includeLower,
         upper: upper,
         includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> companyIdEqualTo(
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      activeSuspensionDurationInHoursElementStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'activeSuspensionDurationInHours',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      activeSuspensionDurationInHoursElementEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'activeSuspensionDurationInHours',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      activeSuspensionDurationInHoursElementContains(String value,
+          {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'activeSuspensionDurationInHours',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      activeSuspensionDurationInHoursElementMatches(String pattern,
+          {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'activeSuspensionDurationInHours',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      activeSuspensionDurationInHoursElementIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'activeSuspensionDurationInHours',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      activeSuspensionDurationInHoursElementIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'activeSuspensionDurationInHours',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      activeSuspensionDurationInHoursLengthEqualTo(int length) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'activeSuspensionDurationInHours',
+        length,
+        true,
+        length,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      activeSuspensionDurationInHoursIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'activeSuspensionDurationInHours',
+        0,
+        true,
+        0,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      activeSuspensionDurationInHoursIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'activeSuspensionDurationInHours',
+        0,
+        false,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      activeSuspensionDurationInHoursLengthLessThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'activeSuspensionDurationInHours',
+        0,
+        true,
+        length,
+        include,
+      );
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      activeSuspensionDurationInHoursLengthGreaterThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'activeSuspensionDurationInHours',
+        length,
+        include,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      activeSuspensionDurationInHoursLengthBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'activeSuspensionDurationInHours',
+        lower,
+        includeLower,
+        upper,
+        includeUpper,
+      );
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition> blockedElementEqualTo(
+      bool value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'blocked',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition> blockedLengthEqualTo(
+      int length) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'blocked',
+        length,
+        true,
+        length,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition> blockedIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'blocked',
+        0,
+        true,
+        0,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition> blockedIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'blocked',
+        0,
+        false,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition> blockedLengthLessThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'blocked',
+        0,
+        true,
+        length,
+        include,
+      );
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      blockedLengthGreaterThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'blocked',
+        length,
+        include,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition> blockedLengthBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'blocked',
+        lower,
+        includeLower,
+        upper,
+        includeUpper,
+      );
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition> companyIdElementEqualTo(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -595,7 +1173,8 @@ extension ContactQueryFilter
     });
   }
 
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> companyIdGreaterThan(
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      companyIdElementGreaterThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -610,7 +1189,8 @@ extension ContactQueryFilter
     });
   }
 
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> companyIdLessThan(
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      companyIdElementLessThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -625,7 +1205,7 @@ extension ContactQueryFilter
     });
   }
 
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> companyIdBetween(
+  QueryBuilder<Contact, Contact, QAfterFilterCondition> companyIdElementBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -644,7 +1224,8 @@ extension ContactQueryFilter
     });
   }
 
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> companyIdStartsWith(
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      companyIdElementStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -657,7 +1238,8 @@ extension ContactQueryFilter
     });
   }
 
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> companyIdEndsWith(
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      companyIdElementEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -670,9 +1252,8 @@ extension ContactQueryFilter
     });
   }
 
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> companyIdContains(
-      String value,
-      {bool caseSensitive = true}) {
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      companyIdElementContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
         property: r'companyId',
@@ -682,7 +1263,7 @@ extension ContactQueryFilter
     });
   }
 
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> companyIdMatches(
+  QueryBuilder<Contact, Contact, QAfterFilterCondition> companyIdElementMatches(
       String pattern,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -691,28 +1272,116 @@ extension ContactQueryFilter
         wildcard: pattern,
         caseSensitive: caseSensitive,
       ));
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      companyIdElementIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'companyId',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      companyIdElementIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'companyId',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition> companyIdLengthEqualTo(
+      int length) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'companyId',
+        length,
+        true,
+        length,
+        true,
+      );
     });
   }
 
   QueryBuilder<Contact, Contact, QAfterFilterCondition> companyIdIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'companyId',
-        value: '',
-      ));
+      return query.listLength(
+        r'companyId',
+        0,
+        true,
+        0,
+        true,
+      );
     });
   }
 
   QueryBuilder<Contact, Contact, QAfterFilterCondition> companyIdIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'companyId',
-        value: '',
-      ));
+      return query.listLength(
+        r'companyId',
+        0,
+        false,
+        999999,
+        true,
+      );
     });
   }
 
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> createdByIdEqualTo(
+  QueryBuilder<Contact, Contact, QAfterFilterCondition> companyIdLengthLessThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'companyId',
+        0,
+        true,
+        length,
+        include,
+      );
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      companyIdLengthGreaterThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'companyId',
+        length,
+        include,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition> companyIdLengthBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'companyId',
+        lower,
+        includeLower,
+        upper,
+        includeUpper,
+      );
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      createdByIdElementEqualTo(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -725,7 +1394,8 @@ extension ContactQueryFilter
     });
   }
 
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> createdByIdGreaterThan(
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      createdByIdElementGreaterThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -740,7 +1410,8 @@ extension ContactQueryFilter
     });
   }
 
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> createdByIdLessThan(
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      createdByIdElementLessThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -755,7 +1426,8 @@ extension ContactQueryFilter
     });
   }
 
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> createdByIdBetween(
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      createdByIdElementBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -774,7 +1446,8 @@ extension ContactQueryFilter
     });
   }
 
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> createdByIdStartsWith(
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      createdByIdElementStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -787,7 +1460,8 @@ extension ContactQueryFilter
     });
   }
 
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> createdByIdEndsWith(
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      createdByIdElementEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -800,9 +1474,8 @@ extension ContactQueryFilter
     });
   }
 
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> createdByIdContains(
-      String value,
-      {bool caseSensitive = true}) {
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      createdByIdElementContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
         property: r'createdById',
@@ -812,9 +1485,8 @@ extension ContactQueryFilter
     });
   }
 
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> createdByIdMatches(
-      String pattern,
-      {bool caseSensitive = true}) {
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      createdByIdElementMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
         property: r'createdById',
@@ -824,26 +1496,116 @@ extension ContactQueryFilter
     });
   }
 
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> createdByIdIsEmpty() {
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      createdByIdElementIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'createdById',
         value: '',
       ));
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      createdByIdElementIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'createdById',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      createdByIdLengthEqualTo(int length) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'createdById',
+        length,
+        true,
+        length,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition> createdByIdIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'createdById',
+        0,
+        true,
+        0,
+        true,
+      );
     });
   }
 
   QueryBuilder<Contact, Contact, QAfterFilterCondition>
       createdByIdIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'createdById',
-        value: '',
-      ));
+      return query.listLength(
+        r'createdById',
+        0,
+        false,
+        999999,
+        true,
+      );
     });
   }
 
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> createdByRoleEqualTo(
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      createdByIdLengthLessThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'createdById',
+        0,
+        true,
+        length,
+        include,
+      );
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      createdByIdLengthGreaterThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'createdById',
+        length,
+        include,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      createdByIdLengthBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'createdById',
+        lower,
+        includeLower,
+        upper,
+        includeUpper,
+      );
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      createdByRoleElementEqualTo(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -857,7 +1619,7 @@ extension ContactQueryFilter
   }
 
   QueryBuilder<Contact, Contact, QAfterFilterCondition>
-      createdByRoleGreaterThan(
+      createdByRoleElementGreaterThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -872,7 +1634,8 @@ extension ContactQueryFilter
     });
   }
 
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> createdByRoleLessThan(
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      createdByRoleElementLessThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -887,7 +1650,8 @@ extension ContactQueryFilter
     });
   }
 
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> createdByRoleBetween(
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      createdByRoleElementBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -906,7 +1670,8 @@ extension ContactQueryFilter
     });
   }
 
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> createdByRoleStartsWith(
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      createdByRoleElementStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -919,7 +1684,8 @@ extension ContactQueryFilter
     });
   }
 
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> createdByRoleEndsWith(
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      createdByRoleElementEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -932,9 +1698,8 @@ extension ContactQueryFilter
     });
   }
 
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> createdByRoleContains(
-      String value,
-      {bool caseSensitive = true}) {
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      createdByRoleElementContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
         property: r'createdByRole',
@@ -944,9 +1709,8 @@ extension ContactQueryFilter
     });
   }
 
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> createdByRoleMatches(
-      String pattern,
-      {bool caseSensitive = true}) {
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      createdByRoleElementMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
         property: r'createdByRole',
@@ -956,26 +1720,116 @@ extension ContactQueryFilter
     });
   }
 
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> createdByRoleIsEmpty() {
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      createdByRoleElementIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'createdByRole',
         value: '',
       ));
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      createdByRoleElementIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'createdByRole',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      createdByRoleLengthEqualTo(int length) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'createdByRole',
+        length,
+        true,
+        length,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition> createdByRoleIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'createdByRole',
+        0,
+        true,
+        0,
+        true,
+      );
     });
   }
 
   QueryBuilder<Contact, Contact, QAfterFilterCondition>
       createdByRoleIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'createdByRole',
-        value: '',
-      ));
+      return query.listLength(
+        r'createdByRole',
+        0,
+        false,
+        999999,
+        true,
+      );
     });
   }
 
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> createdByTypeEqualTo(
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      createdByRoleLengthLessThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'createdByRole',
+        0,
+        true,
+        length,
+        include,
+      );
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      createdByRoleLengthGreaterThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'createdByRole',
+        length,
+        include,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      createdByRoleLengthBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'createdByRole',
+        lower,
+        includeLower,
+        upper,
+        includeUpper,
+      );
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      createdByTypeElementEqualTo(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -989,7 +1843,7 @@ extension ContactQueryFilter
   }
 
   QueryBuilder<Contact, Contact, QAfterFilterCondition>
-      createdByTypeGreaterThan(
+      createdByTypeElementGreaterThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -1004,7 +1858,8 @@ extension ContactQueryFilter
     });
   }
 
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> createdByTypeLessThan(
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      createdByTypeElementLessThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -1019,7 +1874,8 @@ extension ContactQueryFilter
     });
   }
 
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> createdByTypeBetween(
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      createdByTypeElementBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -1038,7 +1894,8 @@ extension ContactQueryFilter
     });
   }
 
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> createdByTypeStartsWith(
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      createdByTypeElementStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -1051,7 +1908,8 @@ extension ContactQueryFilter
     });
   }
 
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> createdByTypeEndsWith(
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      createdByTypeElementEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -1064,9 +1922,8 @@ extension ContactQueryFilter
     });
   }
 
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> createdByTypeContains(
-      String value,
-      {bool caseSensitive = true}) {
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      createdByTypeElementContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
         property: r'createdByType',
@@ -1076,9 +1933,8 @@ extension ContactQueryFilter
     });
   }
 
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> createdByTypeMatches(
-      String pattern,
-      {bool caseSensitive = true}) {
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      createdByTypeElementMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
         property: r'createdByType',
@@ -1088,7 +1944,8 @@ extension ContactQueryFilter
     });
   }
 
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> createdByTypeIsEmpty() {
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      createdByTypeElementIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'createdByType',
@@ -1098,12 +1955,100 @@ extension ContactQueryFilter
   }
 
   QueryBuilder<Contact, Contact, QAfterFilterCondition>
-      createdByTypeIsNotEmpty() {
+      createdByTypeElementIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'createdByType',
         value: '',
       ));
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      createdByTypeLengthEqualTo(int length) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'createdByType',
+        length,
+        true,
+        length,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition> createdByTypeIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'createdByType',
+        0,
+        true,
+        0,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      createdByTypeIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'createdByType',
+        0,
+        false,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      createdByTypeLengthLessThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'createdByType',
+        0,
+        true,
+        length,
+        include,
+      );
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      createdByTypeLengthGreaterThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'createdByType',
+        length,
+        include,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      createdByTypeLengthBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'createdByType',
+        lower,
+        includeLower,
+        upper,
+        includeUpper,
+      );
     });
   }
 
@@ -1237,7 +2182,7 @@ extension ContactQueryFilter
     });
   }
 
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> fonctionEqualTo(
+  QueryBuilder<Contact, Contact, QAfterFilterCondition> fonctionElementEqualTo(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -1250,7 +2195,8 @@ extension ContactQueryFilter
     });
   }
 
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> fonctionGreaterThan(
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      fonctionElementGreaterThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -1265,7 +2211,7 @@ extension ContactQueryFilter
     });
   }
 
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> fonctionLessThan(
+  QueryBuilder<Contact, Contact, QAfterFilterCondition> fonctionElementLessThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -1280,7 +2226,7 @@ extension ContactQueryFilter
     });
   }
 
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> fonctionBetween(
+  QueryBuilder<Contact, Contact, QAfterFilterCondition> fonctionElementBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -1299,7 +2245,8 @@ extension ContactQueryFilter
     });
   }
 
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> fonctionStartsWith(
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      fonctionElementStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -1312,7 +2259,7 @@ extension ContactQueryFilter
     });
   }
 
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> fonctionEndsWith(
+  QueryBuilder<Contact, Contact, QAfterFilterCondition> fonctionElementEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -1325,7 +2272,7 @@ extension ContactQueryFilter
     });
   }
 
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> fonctionContains(
+  QueryBuilder<Contact, Contact, QAfterFilterCondition> fonctionElementContains(
       String value,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -1337,7 +2284,7 @@ extension ContactQueryFilter
     });
   }
 
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> fonctionMatches(
+  QueryBuilder<Contact, Contact, QAfterFilterCondition> fonctionElementMatches(
       String pattern,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -1349,7 +2296,8 @@ extension ContactQueryFilter
     });
   }
 
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> fonctionIsEmpty() {
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      fonctionElementIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'fonction',
@@ -1358,12 +2306,98 @@ extension ContactQueryFilter
     });
   }
 
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> fonctionIsNotEmpty() {
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      fonctionElementIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'fonction',
         value: '',
       ));
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition> fonctionLengthEqualTo(
+      int length) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'fonction',
+        length,
+        true,
+        length,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition> fonctionIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'fonction',
+        0,
+        true,
+        0,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition> fonctionIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'fonction',
+        0,
+        false,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition> fonctionLengthLessThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'fonction',
+        0,
+        true,
+        length,
+        include,
+      );
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      fonctionLengthGreaterThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'fonction',
+        length,
+        include,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition> fonctionLengthBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'fonction',
+        lower,
+        includeLower,
+        upper,
+        includeUpper,
+      );
     });
   }
 
@@ -1545,77 +2579,6 @@ extension ContactQueryFilter
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'idApi',
         value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> lastOnlineDateIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'lastOnlineDate',
-      ));
-    });
-  }
-
-  QueryBuilder<Contact, Contact, QAfterFilterCondition>
-      lastOnlineDateIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'lastOnlineDate',
-      ));
-    });
-  }
-
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> lastOnlineDateEqualTo(
-      DateTime? value) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'lastOnlineDate',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<Contact, Contact, QAfterFilterCondition>
-      lastOnlineDateGreaterThan(
-    DateTime? value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'lastOnlineDate',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> lastOnlineDateLessThan(
-    DateTime? value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'lastOnlineDate',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> lastOnlineDateBetween(
-    DateTime? lower,
-    DateTime? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'lastOnlineDate',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
       ));
     });
   }
@@ -1890,16 +2853,6 @@ extension ContactQueryFilter
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'loginId',
         value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> onlineStatusEqualTo(
-      bool value) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'onlineStatus',
-        value: value,
       ));
     });
   }
@@ -2223,7 +3176,7 @@ extension ContactQueryFilter
     });
   }
 
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> roleEqualTo(
+  QueryBuilder<Contact, Contact, QAfterFilterCondition> roleElementEqualTo(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -2236,7 +3189,7 @@ extension ContactQueryFilter
     });
   }
 
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> roleGreaterThan(
+  QueryBuilder<Contact, Contact, QAfterFilterCondition> roleElementGreaterThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -2251,7 +3204,7 @@ extension ContactQueryFilter
     });
   }
 
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> roleLessThan(
+  QueryBuilder<Contact, Contact, QAfterFilterCondition> roleElementLessThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -2266,7 +3219,7 @@ extension ContactQueryFilter
     });
   }
 
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> roleBetween(
+  QueryBuilder<Contact, Contact, QAfterFilterCondition> roleElementBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -2285,7 +3238,7 @@ extension ContactQueryFilter
     });
   }
 
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> roleStartsWith(
+  QueryBuilder<Contact, Contact, QAfterFilterCondition> roleElementStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -2298,7 +3251,7 @@ extension ContactQueryFilter
     });
   }
 
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> roleEndsWith(
+  QueryBuilder<Contact, Contact, QAfterFilterCondition> roleElementEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -2311,7 +3264,7 @@ extension ContactQueryFilter
     });
   }
 
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> roleContains(
+  QueryBuilder<Contact, Contact, QAfterFilterCondition> roleElementContains(
       String value,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -2323,7 +3276,7 @@ extension ContactQueryFilter
     });
   }
 
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> roleMatches(
+  QueryBuilder<Contact, Contact, QAfterFilterCondition> roleElementMatches(
       String pattern,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -2335,7 +3288,7 @@ extension ContactQueryFilter
     });
   }
 
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> roleIsEmpty() {
+  QueryBuilder<Contact, Contact, QAfterFilterCondition> roleElementIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'role',
@@ -2344,12 +3297,97 @@ extension ContactQueryFilter
     });
   }
 
-  QueryBuilder<Contact, Contact, QAfterFilterCondition> roleIsNotEmpty() {
+  QueryBuilder<Contact, Contact, QAfterFilterCondition>
+      roleElementIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'role',
         value: '',
       ));
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition> roleLengthEqualTo(
+      int length) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'role',
+        length,
+        true,
+        length,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition> roleIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'role',
+        0,
+        true,
+        0,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition> roleIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'role',
+        0,
+        false,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition> roleLengthLessThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'role',
+        0,
+        true,
+        length,
+        include,
+      );
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition> roleLengthGreaterThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'role',
+        length,
+        include,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QAfterFilterCondition> roleLengthBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'role',
+        lower,
+        includeLower,
+        upper,
+        includeUpper,
+      );
     });
   }
 
@@ -2491,104 +3529,6 @@ extension ContactQueryLinks
     on QueryBuilder<Contact, Contact, QFilterCondition> {}
 
 extension ContactQuerySortBy on QueryBuilder<Contact, Contact, QSortBy> {
-  QueryBuilder<Contact, Contact, QAfterSortBy> sortByActiveEndDate() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'activeEndDate', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Contact, Contact, QAfterSortBy> sortByActiveEndDateDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'activeEndDate', Sort.desc);
-    });
-  }
-
-  QueryBuilder<Contact, Contact, QAfterSortBy> sortByActiveStartDate() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'activeStartDate', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Contact, Contact, QAfterSortBy> sortByActiveStartDateDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'activeStartDate', Sort.desc);
-    });
-  }
-
-  QueryBuilder<Contact, Contact, QAfterSortBy> sortByActiveSuspended() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'activeSuspended', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Contact, Contact, QAfterSortBy> sortByActiveSuspendedDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'activeSuspended', Sort.desc);
-    });
-  }
-
-  QueryBuilder<Contact, Contact, QAfterSortBy>
-      sortByActiveSuspensionDurationInHours() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'activeSuspensionDurationInHours', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Contact, Contact, QAfterSortBy>
-      sortByActiveSuspensionDurationInHoursDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'activeSuspensionDurationInHours', Sort.desc);
-    });
-  }
-
-  QueryBuilder<Contact, Contact, QAfterSortBy> sortByCompanyId() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'companyId', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Contact, Contact, QAfterSortBy> sortByCompanyIdDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'companyId', Sort.desc);
-    });
-  }
-
-  QueryBuilder<Contact, Contact, QAfterSortBy> sortByCreatedById() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'createdById', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Contact, Contact, QAfterSortBy> sortByCreatedByIdDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'createdById', Sort.desc);
-    });
-  }
-
-  QueryBuilder<Contact, Contact, QAfterSortBy> sortByCreatedByRole() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'createdByRole', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Contact, Contact, QAfterSortBy> sortByCreatedByRoleDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'createdByRole', Sort.desc);
-    });
-  }
-
-  QueryBuilder<Contact, Contact, QAfterSortBy> sortByCreatedByType() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'createdByType', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Contact, Contact, QAfterSortBy> sortByCreatedByTypeDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'createdByType', Sort.desc);
-    });
-  }
-
   QueryBuilder<Contact, Contact, QAfterSortBy> sortByEmail() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'email', Sort.asc);
@@ -2598,18 +3538,6 @@ extension ContactQuerySortBy on QueryBuilder<Contact, Contact, QSortBy> {
   QueryBuilder<Contact, Contact, QAfterSortBy> sortByEmailDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'email', Sort.desc);
-    });
-  }
-
-  QueryBuilder<Contact, Contact, QAfterSortBy> sortByFonction() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'fonction', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Contact, Contact, QAfterSortBy> sortByFonctionDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'fonction', Sort.desc);
     });
   }
 
@@ -2625,18 +3553,6 @@ extension ContactQuerySortBy on QueryBuilder<Contact, Contact, QSortBy> {
     });
   }
 
-  QueryBuilder<Contact, Contact, QAfterSortBy> sortByLastOnlineDate() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'lastOnlineDate', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Contact, Contact, QAfterSortBy> sortByLastOnlineDateDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'lastOnlineDate', Sort.desc);
-    });
-  }
-
   QueryBuilder<Contact, Contact, QAfterSortBy> sortByLoginId() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'loginId', Sort.asc);
@@ -2646,18 +3562,6 @@ extension ContactQuerySortBy on QueryBuilder<Contact, Contact, QSortBy> {
   QueryBuilder<Contact, Contact, QAfterSortBy> sortByLoginIdDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'loginId', Sort.desc);
-    });
-  }
-
-  QueryBuilder<Contact, Contact, QAfterSortBy> sortByOnlineStatus() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'onlineStatus', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Contact, Contact, QAfterSortBy> sortByOnlineStatusDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'onlineStatus', Sort.desc);
     });
   }
 
@@ -2697,18 +3601,6 @@ extension ContactQuerySortBy on QueryBuilder<Contact, Contact, QSortBy> {
     });
   }
 
-  QueryBuilder<Contact, Contact, QAfterSortBy> sortByRole() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'role', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Contact, Contact, QAfterSortBy> sortByRoleDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'role', Sort.desc);
-    });
-  }
-
   QueryBuilder<Contact, Contact, QAfterSortBy> sortByUsername() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'username', Sort.asc);
@@ -2724,104 +3616,6 @@ extension ContactQuerySortBy on QueryBuilder<Contact, Contact, QSortBy> {
 
 extension ContactQuerySortThenBy
     on QueryBuilder<Contact, Contact, QSortThenBy> {
-  QueryBuilder<Contact, Contact, QAfterSortBy> thenByActiveEndDate() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'activeEndDate', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Contact, Contact, QAfterSortBy> thenByActiveEndDateDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'activeEndDate', Sort.desc);
-    });
-  }
-
-  QueryBuilder<Contact, Contact, QAfterSortBy> thenByActiveStartDate() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'activeStartDate', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Contact, Contact, QAfterSortBy> thenByActiveStartDateDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'activeStartDate', Sort.desc);
-    });
-  }
-
-  QueryBuilder<Contact, Contact, QAfterSortBy> thenByActiveSuspended() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'activeSuspended', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Contact, Contact, QAfterSortBy> thenByActiveSuspendedDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'activeSuspended', Sort.desc);
-    });
-  }
-
-  QueryBuilder<Contact, Contact, QAfterSortBy>
-      thenByActiveSuspensionDurationInHours() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'activeSuspensionDurationInHours', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Contact, Contact, QAfterSortBy>
-      thenByActiveSuspensionDurationInHoursDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'activeSuspensionDurationInHours', Sort.desc);
-    });
-  }
-
-  QueryBuilder<Contact, Contact, QAfterSortBy> thenByCompanyId() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'companyId', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Contact, Contact, QAfterSortBy> thenByCompanyIdDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'companyId', Sort.desc);
-    });
-  }
-
-  QueryBuilder<Contact, Contact, QAfterSortBy> thenByCreatedById() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'createdById', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Contact, Contact, QAfterSortBy> thenByCreatedByIdDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'createdById', Sort.desc);
-    });
-  }
-
-  QueryBuilder<Contact, Contact, QAfterSortBy> thenByCreatedByRole() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'createdByRole', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Contact, Contact, QAfterSortBy> thenByCreatedByRoleDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'createdByRole', Sort.desc);
-    });
-  }
-
-  QueryBuilder<Contact, Contact, QAfterSortBy> thenByCreatedByType() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'createdByType', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Contact, Contact, QAfterSortBy> thenByCreatedByTypeDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'createdByType', Sort.desc);
-    });
-  }
-
   QueryBuilder<Contact, Contact, QAfterSortBy> thenByEmail() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'email', Sort.asc);
@@ -2831,18 +3625,6 @@ extension ContactQuerySortThenBy
   QueryBuilder<Contact, Contact, QAfterSortBy> thenByEmailDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'email', Sort.desc);
-    });
-  }
-
-  QueryBuilder<Contact, Contact, QAfterSortBy> thenByFonction() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'fonction', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Contact, Contact, QAfterSortBy> thenByFonctionDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'fonction', Sort.desc);
     });
   }
 
@@ -2870,18 +3652,6 @@ extension ContactQuerySortThenBy
     });
   }
 
-  QueryBuilder<Contact, Contact, QAfterSortBy> thenByLastOnlineDate() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'lastOnlineDate', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Contact, Contact, QAfterSortBy> thenByLastOnlineDateDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'lastOnlineDate', Sort.desc);
-    });
-  }
-
   QueryBuilder<Contact, Contact, QAfterSortBy> thenByLoginId() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'loginId', Sort.asc);
@@ -2891,18 +3661,6 @@ extension ContactQuerySortThenBy
   QueryBuilder<Contact, Contact, QAfterSortBy> thenByLoginIdDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'loginId', Sort.desc);
-    });
-  }
-
-  QueryBuilder<Contact, Contact, QAfterSortBy> thenByOnlineStatus() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'onlineStatus', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Contact, Contact, QAfterSortBy> thenByOnlineStatusDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'onlineStatus', Sort.desc);
     });
   }
 
@@ -2939,18 +3697,6 @@ extension ContactQuerySortThenBy
   QueryBuilder<Contact, Contact, QAfterSortBy> thenByRegistrationDateDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'registrationDate', Sort.desc);
-    });
-  }
-
-  QueryBuilder<Contact, Contact, QAfterSortBy> thenByRole() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'role', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Contact, Contact, QAfterSortBy> thenByRoleDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'role', Sort.desc);
     });
   }
 
@@ -2994,33 +3740,33 @@ extension ContactQueryWhereDistinct
     });
   }
 
-  QueryBuilder<Contact, Contact, QDistinct> distinctByCompanyId(
-      {bool caseSensitive = true}) {
+  QueryBuilder<Contact, Contact, QDistinct> distinctByBlocked() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'companyId', caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'blocked');
     });
   }
 
-  QueryBuilder<Contact, Contact, QDistinct> distinctByCreatedById(
-      {bool caseSensitive = true}) {
+  QueryBuilder<Contact, Contact, QDistinct> distinctByCompanyId() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'createdById', caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'companyId');
     });
   }
 
-  QueryBuilder<Contact, Contact, QDistinct> distinctByCreatedByRole(
-      {bool caseSensitive = true}) {
+  QueryBuilder<Contact, Contact, QDistinct> distinctByCreatedById() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'createdByRole',
-          caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'createdById');
     });
   }
 
-  QueryBuilder<Contact, Contact, QDistinct> distinctByCreatedByType(
-      {bool caseSensitive = true}) {
+  QueryBuilder<Contact, Contact, QDistinct> distinctByCreatedByRole() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'createdByType',
-          caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'createdByRole');
+    });
+  }
+
+  QueryBuilder<Contact, Contact, QDistinct> distinctByCreatedByType() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'createdByType');
     });
   }
 
@@ -3031,10 +3777,9 @@ extension ContactQueryWhereDistinct
     });
   }
 
-  QueryBuilder<Contact, Contact, QDistinct> distinctByFonction(
-      {bool caseSensitive = true}) {
+  QueryBuilder<Contact, Contact, QDistinct> distinctByFonction() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'fonction', caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'fonction');
     });
   }
 
@@ -3042,12 +3787,6 @@ extension ContactQueryWhereDistinct
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'idApi', caseSensitive: caseSensitive);
-    });
-  }
-
-  QueryBuilder<Contact, Contact, QDistinct> distinctByLastOnlineDate() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'lastOnlineDate');
     });
   }
 
@@ -3061,12 +3800,6 @@ extension ContactQueryWhereDistinct
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'loginId', caseSensitive: caseSensitive);
-    });
-  }
-
-  QueryBuilder<Contact, Contact, QDistinct> distinctByOnlineStatus() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'onlineStatus');
     });
   }
 
@@ -3091,10 +3824,9 @@ extension ContactQueryWhereDistinct
     });
   }
 
-  QueryBuilder<Contact, Contact, QDistinct> distinctByRole(
-      {bool caseSensitive = true}) {
+  QueryBuilder<Contact, Contact, QDistinct> distinctByRole() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'role', caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'role');
     });
   }
 
@@ -3114,50 +3846,61 @@ extension ContactQueryProperty
     });
   }
 
-  QueryBuilder<Contact, DateTime?, QQueryOperations> activeEndDateProperty() {
+  QueryBuilder<Contact, List<DateTime?>, QQueryOperations>
+      activeEndDateProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'activeEndDate');
     });
   }
 
-  QueryBuilder<Contact, DateTime?, QQueryOperations> activeStartDateProperty() {
+  QueryBuilder<Contact, List<DateTime?>, QQueryOperations>
+      activeStartDateProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'activeStartDate');
     });
   }
 
-  QueryBuilder<Contact, bool, QQueryOperations> activeSuspendedProperty() {
+  QueryBuilder<Contact, List<bool>, QQueryOperations>
+      activeSuspendedProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'activeSuspended');
     });
   }
 
-  QueryBuilder<Contact, int?, QQueryOperations>
+  QueryBuilder<Contact, List<String?>, QQueryOperations>
       activeSuspensionDurationInHoursProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'activeSuspensionDurationInHours');
     });
   }
 
-  QueryBuilder<Contact, String, QQueryOperations> companyIdProperty() {
+  QueryBuilder<Contact, List<bool>, QQueryOperations> blockedProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'blocked');
+    });
+  }
+
+  QueryBuilder<Contact, List<String>, QQueryOperations> companyIdProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'companyId');
     });
   }
 
-  QueryBuilder<Contact, String, QQueryOperations> createdByIdProperty() {
+  QueryBuilder<Contact, List<String>, QQueryOperations> createdByIdProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'createdById');
     });
   }
 
-  QueryBuilder<Contact, String, QQueryOperations> createdByRoleProperty() {
+  QueryBuilder<Contact, List<String>, QQueryOperations>
+      createdByRoleProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'createdByRole');
     });
   }
 
-  QueryBuilder<Contact, String, QQueryOperations> createdByTypeProperty() {
+  QueryBuilder<Contact, List<String>, QQueryOperations>
+      createdByTypeProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'createdByType');
     });
@@ -3169,7 +3912,7 @@ extension ContactQueryProperty
     });
   }
 
-  QueryBuilder<Contact, String, QQueryOperations> fonctionProperty() {
+  QueryBuilder<Contact, List<String>, QQueryOperations> fonctionProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'fonction');
     });
@@ -3178,12 +3921,6 @@ extension ContactQueryProperty
   QueryBuilder<Contact, String, QQueryOperations> idApiProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'idApi');
-    });
-  }
-
-  QueryBuilder<Contact, DateTime?, QQueryOperations> lastOnlineDateProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'lastOnlineDate');
     });
   }
 
@@ -3197,12 +3934,6 @@ extension ContactQueryProperty
   QueryBuilder<Contact, String, QQueryOperations> loginIdProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'loginId');
-    });
-  }
-
-  QueryBuilder<Contact, bool, QQueryOperations> onlineStatusProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'onlineStatus');
     });
   }
 
@@ -3224,7 +3955,7 @@ extension ContactQueryProperty
     });
   }
 
-  QueryBuilder<Contact, String, QQueryOperations> roleProperty() {
+  QueryBuilder<Contact, List<String>, QQueryOperations> roleProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'role');
     });

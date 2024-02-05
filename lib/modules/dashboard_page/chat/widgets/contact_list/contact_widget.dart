@@ -67,7 +67,7 @@ class ContactWidget extends GetView<ContactController> {
                         ),
                       ),
                       Text(
-                        capitalizeText(contact.fonction),
+                        capitalizeText(contact.email),
                         style: TextStyle(
                           color: AppColors.primaryColor.withOpacity(.7),
                           fontWeight: FontWeight.bold,

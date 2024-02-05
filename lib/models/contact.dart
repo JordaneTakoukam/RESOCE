@@ -1,9 +1,9 @@
 import 'package:isar/isar.dart';
 part 'contact.g.dart';
 
-//dart run build_runner build
+// dart run build_runner build
 
-@collection
+@Collection()
 class Contact {
   Id id = Isar.autoIncrement;
 
@@ -12,21 +12,20 @@ class Contact {
   final String password;
   final String email;
   final String profilePicture;
-  final bool onlineStatus;
-  final DateTime? lastOnlineDate;
-  final String createdByType;
-  final String createdByRole;
-  final String createdById;
-  final bool activeSuspended;
-  final int? activeSuspensionDurationInHours;
-  final DateTime? activeStartDate;
-  final DateTime? activeEndDate;
-  final String companyId;
-  final String role;
-  final String fonction;
+  final List<String> createdByType;
+  final List<String> createdByRole;
+  final List<String> createdById;
+  final List<bool> activeSuspended;
+  final List<String?> activeSuspensionDurationInHours;
+  final List<DateTime?> activeStartDate;
+  final List<DateTime?> activeEndDate;
+  final List<String> companyId;
+  final List<String> role;
+  final List<String> fonction;
   final String loginId;
   final DateTime registrationDate;
   final List<DateTime> loginHistory;
+  final List<bool> blocked;
 
   Contact({
     required this.idApi,
@@ -34,8 +33,6 @@ class Contact {
     required this.password,
     required this.email,
     required this.profilePicture,
-    required this.onlineStatus,
-    required this.lastOnlineDate,
     required this.createdByType,
     required this.createdByRole,
     required this.createdById,
@@ -49,6 +46,7 @@ class Contact {
     required this.loginId,
     required this.registrationDate,
     required this.loginHistory,
+    required this.blocked,
   });
 
   Contact.empty()
@@ -57,48 +55,68 @@ class Contact {
         password = '',
         email = '',
         profilePicture = '',
-        onlineStatus = false,
-        lastOnlineDate = null,
-        createdByType = '',
-        createdByRole = '',
-        createdById = '',
-        activeSuspended = false,
-        activeSuspensionDurationInHours = null,
-        activeStartDate = null,
-        activeEndDate = null,
-        companyId = '',
-        role = '',
-        fonction = '',
+        createdByType = [],
+        createdByRole = [],
+        createdById = [],
+        activeSuspended = [],
+        activeSuspensionDurationInHours = [],
+        activeStartDate = [],
+        activeEndDate = [],
+        companyId = [],
+        role = [],
+        fonction = [],
         loginId = '',
         registrationDate = DateTime.now(),
+        blocked = [],
         loginHistory = const [];
 
   factory Contact.fromJson(Map<String, dynamic> json) {
+    List<Map<String, dynamic>> companyInfos = [];
+    if (json['companyInfos'] is List) {
+      companyInfos =
+          (json['companyInfos'] as List).cast<Map<String, dynamic>>();
+    }
+
+    List<Map<String, dynamic>> createdByList = companyInfos
+        .map((info) => info['createdBy'] ?? {})
+        .cast<Map<String, dynamic>>()
+        .toList();
+
+    List<Map<String, dynamic>> activeList = companyInfos
+        .map((info) => info['active'] ?? {})
+        .cast<Map<String, dynamic>>()
+        .toList();
+
     return Contact(
       idApi: json['_id'] ?? "",
       username: json['profile']['username'] ?? "",
       password: json['profile']['password'] ?? "",
       email: json['profile']['email'] ?? "",
       profilePicture: json['profile']['profilePicture'] ?? "",
-      onlineStatus: json['online']['status'] ?? false,
-      lastOnlineDate: json['online']['lastOnlineDate'] != null
-          ? DateTime.parse(json['online']['lastOnlineDate'])
-          : null,
-      createdByType: json['createdby']['type'] ?? "",
-      createdByRole: json['createdby']['role'] ?? "",
-      createdById: json['createdby']['id'] ?? "",
-      activeSuspended: json['active']['suspended'] ?? false,
-      activeSuspensionDurationInHours: json['active']
-          ['suspensionDurationInHours'],
-      activeStartDate: json['active']['startDate'] != null
-          ? DateTime.parse(json['active']['startDate'])
-          : null,
-      activeEndDate: json['active']['endDate'] != null
-          ? DateTime.parse(json['active']['endDate'])
-          : null,
-      companyId: json['companyId'] ?? "",
-      role: json['role'] ?? "",
-      fonction: json['fonction'] ?? "",
+      createdByType:
+          createdByList.map((info) => info['type'] as String).toList(),
+      createdByRole:
+          createdByList.map((info) => info['role'] as String).toList(),
+      createdById: createdByList.map((info) => info['id'] as String).toList(),
+      activeSuspended:
+          activeList.map((info) => info['suspended'] as bool).toList(),
+      blocked: activeList.map((info) => info['blocked'] as bool).toList(),
+      activeSuspensionDurationInHours: activeList
+          .map((info) => info['suspensionDurationInHours'] as String)
+          .toList(),
+      activeStartDate: activeList
+          .map((info) => info['startDate'] != null
+              ? DateTime.parse(info['startDate'])
+              : null)
+          .toList(),
+      activeEndDate: activeList
+          .map((info) =>
+              info['endDate'] != null ? DateTime.parse(info['endDate']) : null)
+          .toList(),
+      companyId:
+          companyInfos.map((info) => info['companyId'] as String).toList(),
+      role: companyInfos.map((info) => info['role'] as String).toList(),
+      fonction: companyInfos.map((info) => info['fonction'] as String).toList(),
       loginId: json['loginId'] ?? "",
       registrationDate: DateTime.parse(json['registrationDate']),
       loginHistory: (json['loginHistory'] as List)
