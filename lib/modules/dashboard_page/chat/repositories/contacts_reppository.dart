@@ -5,11 +5,14 @@ import 'package:resoce/.config.dart';
 
 class ContactListRepository {
   Future<Map<String, dynamic>> getContactList({
-    required String companyId,
+    required List<String> companyIds,
     required String token,
   }) async {
+    String queryString =
+        companyIds.length == 1 ? companyIds.first : companyIds.join(",");
+
     final url = Uri.parse(
-        '${AppConfig.api}/api/v1/client/get/contacts-client/$companyId');
+        '${AppConfig.api}/api/v1/client/contacts-client/get?companyIds=$queryString');
 
     try {
       final response = await http.get(

@@ -22,11 +22,11 @@ class ContactController extends GetxController {
     contactList.value = List<Contact>.from(listDbContact);
 
     var client = await LocalDb.getClient();
-    var companyId = client!.companyId;
+    var companyIds = client!.companyId;
     var token = await AppProvider().getTokenFromLocalStorage();
 
     var data = await repository.getContactList(
-      companyId: companyId,
+      companyIds: companyIds,
       token: token!,
     );
 

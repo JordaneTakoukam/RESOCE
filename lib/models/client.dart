@@ -1,9 +1,9 @@
 import 'package:isar/isar.dart';
 part 'client.g.dart';
 
-//dart run build_runner build
+// dart run build_runner build
 
-@collection
+@Collection()
 class Client {
   Id id = Isar.autoIncrement;
 
@@ -14,16 +14,16 @@ class Client {
   final String profilePicture;
   final bool onlineStatus;
   final DateTime? lastOnlineDate;
-  final String createdByType;
-  final String createdByRole;
-  final String createdById;
-  final bool activeSuspended;
-  final int? activeSuspensionDurationInHours;
-  final DateTime? activeStartDate;
-  final DateTime? activeEndDate;
-  final String companyId;
-  final String role;
-  final String fonction;
+  final List<String> createdByType;
+  final List<String> createdByRole;
+  final List<String> createdById;
+  final List<bool> activeSuspended;
+  final List<String?> activeSuspensionDurationInHours;
+  final List<DateTime?> activeStartDate;
+  final List<DateTime?> activeEndDate;
+  final List<String> companyId;
+  final List<String> role;
+  final List<String> fonction;
   final String loginId;
   final DateTime registrationDate;
   final List<DateTime> loginHistory;
@@ -59,21 +59,33 @@ class Client {
         profilePicture = '',
         onlineStatus = false,
         lastOnlineDate = null,
-        createdByType = '',
-        createdByRole = '',
-        createdById = '',
-        activeSuspended = false,
-        activeSuspensionDurationInHours = null,
-        activeStartDate = null,
-        activeEndDate = null,
-        companyId = '',
-        role = '',
-        fonction = '',
+        createdByType = [],
+        createdByRole = [],
+        createdById = [],
+        activeSuspended = [],
+        activeSuspensionDurationInHours = [],
+        activeStartDate = [],
+        activeEndDate = [],
+        companyId = [],
+        role = [],
+        fonction = [],
         loginId = '',
         registrationDate = DateTime.now(),
         loginHistory = const [];
 
   factory Client.fromJson(Map<String, dynamic> json) {
+    List<Map<String, dynamic>> companyInfos = json['companyInfos'];
+
+    List<Map<String, dynamic>> createdByList = companyInfos
+        .map((info) => info['createdBy'] ?? {})
+        .cast<Map<String, dynamic>>()
+        .toList();
+
+    List<Map<String, dynamic>> activeList = companyInfos
+        .map((info) => info['active'] ?? {})
+        .cast<Map<String, dynamic>>()
+        .toList();
+
     return Client(
       idApi: json['_id'] ?? "",
       username: json['profile']['username'] ?? "",
@@ -84,21 +96,29 @@ class Client {
       lastOnlineDate: json['online']['lastOnlineDate'] != null
           ? DateTime.parse(json['online']['lastOnlineDate'])
           : null,
-      createdByType: json['createdby']['type'] ?? "",
-      createdByRole: json['createdby']['role'] ?? "",
-      createdById: json['createdby']['id'] ?? "",
-      activeSuspended: json['active']['suspended'] ?? false,
-      activeSuspensionDurationInHours: json['active']
-          ['suspensionDurationInHours'],
-      activeStartDate: json['active']['startDate'] != null
-          ? DateTime.parse(json['active']['startDate'])
-          : null,
-      activeEndDate: json['active']['endDate'] != null
-          ? DateTime.parse(json['active']['endDate'])
-          : null,
-      companyId: json['companyId'] ?? "",
-      role: json['role'] ?? "",
-      fonction: json['fonction'] ?? "",
+      createdByType:
+          createdByList.map((info) => info['type'] as String).toList(),
+      createdByRole:
+          createdByList.map((info) => info['role'] as String).toList(),
+      createdById: createdByList.map((info) => info['id'] as String).toList(),
+      activeSuspended:
+          activeList.map((info) => info['suspended'] as bool).toList(),
+      activeSuspensionDurationInHours: activeList
+          .map((info) => info['suspensionDurationInHours'] as String)
+          .toList(),
+      activeStartDate: activeList
+          .map((info) => info['startDate'] != null
+              ? DateTime.parse(info['startDate'])
+              : null)
+          .toList(),
+      activeEndDate: activeList
+          .map((info) =>
+              info['endDate'] != null ? DateTime.parse(info['endDate']) : null)
+          .toList(),
+      companyId:
+          companyInfos.map((info) => info['companyId'] as String).toList(),
+      role: companyInfos.map((info) => info['role'] as String).toList(),
+      fonction: companyInfos.map((info) => info['fonction'] as String).toList(),
       loginId: json['loginId'] ?? "",
       registrationDate: DateTime.parse(json['registrationDate']),
       loginHistory: (json['loginHistory'] as List)
