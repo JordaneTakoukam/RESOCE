@@ -2,13 +2,12 @@ import 'package:isar/isar.dart';
 
 @Collection()
 class Company {
-  @Id()
-  late int id;
+  Id id = Isar.autoIncrement;
 
   final String companyName;
   final DateTime registrationDate;
   final String ceoName;
-  final String ceoPhoneNumber;
+  final List<String> ceoPhoneNumbers;
   final String ceoEmail;
   final String locationCountry;
   final String locationCity;
@@ -26,7 +25,7 @@ class Company {
     required this.companyName,
     required this.registrationDate,
     required this.ceoName,
-    required this.ceoPhoneNumber,
+    required this.ceoPhoneNumbers,
     required this.ceoEmail,
     required this.locationCountry,
     required this.locationCity,
@@ -46,7 +45,7 @@ class Company {
       companyName: json['companyName'],
       registrationDate: DateTime.parse(json['registrationDate']),
       ceoName: json['ceo']['name'],
-      ceoPhoneNumber: json['ceo']['phoneNumber'],
+      ceoPhoneNumbers: json['ceo']['phoneNumbers'],
       ceoEmail: json['ceo']['email'],
       locationCountry: json['location']['country'],
       locationCity: json['location']['city'],

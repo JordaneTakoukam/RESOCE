@@ -103,4 +103,5 @@ void preChargeImageApp(BuildContext context) async {
   precacheImage(AssetImage(Chemin.icone.anonceOutline), context);
   precacheImage(AssetImage(Chemin.icone.settingFlat), context);
   precacheImage(AssetImage(Chemin.icone.settingOutline), context);
+  precacheImage(AssetImage(Chemin.icone.newUser), context);
 }
