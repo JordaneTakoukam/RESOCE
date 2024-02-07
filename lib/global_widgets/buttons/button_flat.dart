@@ -15,6 +15,7 @@ class ButtonFlat extends StatelessWidget {
   final double height;
   final bool load;
   final bool iconeNext;
+  final IconData? startIcon;
 
   const ButtonFlat(
       {Key? key,
@@ -26,7 +27,8 @@ class ButtonFlat extends StatelessWidget {
       this.nextText = '',
       this.height = .056,
       this.load = false,
-      this.iconeNext = false})
+      this.iconeNext = false,
+      this.startIcon})
       : super(key: key);
 
   @override
@@ -59,20 +61,36 @@ class ButtonFlat extends StatelessWidget {
                     Center(
                       child: SizedBox(
                         width: Get.width * widthText,
-                        child: Text(
-                          "${capitalizeText(title.tr)}${' ${nextText.tr}'}",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: Get.width * .035,
-                          ),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            startIcon != null
+                                ? Padding(
+                                  padding: EdgeInsets.only(right: Get.width *.025),
+                                  child: Icon(
+                                      startIcon,
+                                      color: Colors.white,
+                                    ),
+                                )
+                                : const SizedBox.shrink(),
+                            Text(
+                              "${capitalizeText(title.tr)}${' ${nextText.tr}'}",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: Get.width * .035,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
                     iconeNext
                         ? SizedBox(
-                          width: Get.width *.08,
-                          child: Image.asset(Chemin.icone.next, color: Colors.white))
+                            width: Get.width * .08,
+                            child: Image.asset(Chemin.icone.next,
+                                color: Colors.white))
                         : const SizedBox.shrink()
                   ],
                 ),

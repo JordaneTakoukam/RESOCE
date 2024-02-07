@@ -47,13 +47,16 @@ class SlidersCreateCompanyPage extends GetView<CreateCompanyController> {
               ),
               SizedBox(height: Get.height * .025),
               Center(
-                child: Text(
-                  capitalizeText("create_account_for_my_business".tr),
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.black.withOpacity(.8),
-                    fontSize: Get.width * .06,
-                    fontWeight: FontWeight.w900,
+                child: Padding(
+                  padding:  EdgeInsets.symmetric(horizontal: Get.width *.2),
+                  child: Text(
+                    capitalizeText("create_account_for_my_business".tr),
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.black.withOpacity(.8),
+                      fontSize: Get.width * .06,
+                      fontWeight: FontWeight.w900,
+                    ),
                   ),
                 ),
               ),

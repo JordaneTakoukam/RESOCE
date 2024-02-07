@@ -45,5 +45,21 @@ const fr = {
   'complete_registration':
       "pour finaliser l'inscription de votre entreprise, vous devez créer un profil utilisateur",
   'or': 'ou',
-  "almost_done": "almost done!"
+  "almost_done": "presque terminé !",
+  'continue': 'continuer',
+  'login_id': 'identifiant de connexion',
+
+  'mister': 'M.',
+  'madame': 'Mme',
+  'welcome': 'bienvenue',
+
+  "company_created_and_registered_successfully":
+      "Entreprise créée et enregistrée avec succès",
+  "user_profile_created_successfully": "Profil utilisateur créé avec succès",
+  "activating_company": "Activation de l'entreprise",
+  "your_account_will_be_activated_soon":
+      "Votre compte sera activé sous peu. Cette opération peut prendre jusqu'à 30 minutes. Merci pour votre patience.",
+  "your_login_information": "Vos informations de connexion",
+  "refresh_to_check_activation_status":
+      "Actualisez pour vérifier le statut d'activation de votre entreprise",
 };

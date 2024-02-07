@@ -56,6 +56,7 @@ class ConfirmCreateCompanyPage extends GetView<CreateCompanyController> {
                   repeat: true,
                   width: Get.width * .55,
                   height: Get.width * .55,
+                  
                   fit: BoxFit.fill,
                 ),
                 SizedBox(height: Get.height * .03),

@@ -48,4 +48,20 @@ final en = {
   'or': 'or',
   'almost_done': 'almost done!',
 
+  'continue': 'continue',
+  'login_id': 'loginId',
+
+  'mister': 'Mr.',
+  'madame': 'Ms',
+  'welcome': 'welcome',
+
+  "company_created_and_registered_successfully":
+      "company created and registered successfully",
+  "user_profile_created_successfully": "user profile created successfully",
+  "activating_company": "activating company",
+  "your_account_will_be_activated_soon":
+      "your account will be activated soon. this process may take up to 30 minutes. thank you for your patience.",
+  "your_login_information": "your login information",
+  "refresh_to_check_activation_status":
+      "refresh to check the activation status of your company",
 };

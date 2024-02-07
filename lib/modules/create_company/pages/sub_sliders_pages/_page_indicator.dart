@@ -74,7 +74,7 @@ class DotIndicatorCreateCompany extends GetView<CreateCompanyController> {
                             Get.toNamed(Routes.ABONNEMENTCREATECOMPANY);
                           },
                           widthText: .35,
-                          title: "finish",
+                          title: "continue",
                           select: true,
                         )),
               ),

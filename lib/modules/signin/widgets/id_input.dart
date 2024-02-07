@@ -16,7 +16,7 @@ class IdInput extends GetView<SignInController> {
         focusNode: controller.focusId,
         width: width,
         required: true,
-        labelText: capitalizeText('identifier'.tr),
+        labelText: capitalizeText('login_id'.tr),
         keyboardType: TextInputType.text,
         controller: controller.idController.value,
         validator: (value) {

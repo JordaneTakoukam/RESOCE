@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:resoce/core/colors/color_app.dart';
 import 'package:resoce/core/functions/functions.dart';
 import 'package:resoce/core/paths/paths.dart';
+import 'package:resoce/data/providers/languages_providers.dart';
 import 'package:resoce/global_widgets/animations/delay_widget.dart';
 import 'package:resoce/global_widgets/buttons/button_flat.dart';
 import 'package:resoce/global_widgets/buttons/button_icon_back.dart';
@@ -21,6 +22,9 @@ class SignInPage extends GetView<SignInController> {
   @override
   Widget build(BuildContext context) {
     final GlobalKey<FormState> formSignin = GlobalKey<FormState>();
+    var langeProvuder = Get.find<LanguageProvider>();
+    var lang = langeProvuder.getLanguage();
+
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -121,8 +125,8 @@ class SignInPage extends GetView<SignInController> {
                       children: [
                         Container(
                           width: Get.width * .37,
-                          height: 1.5,
-                          decoration: const BoxDecoration(color: AppColors.textColor),
+                          height: 1,
+                          decoration: const BoxDecoration(color: Color.fromARGB(255, 141, 140, 140)),
                         ),
                         Padding(
                           padding:  EdgeInsets.symmetric(horizontal: Get.width *.05),
@@ -130,20 +134,20 @@ class SignInPage extends GetView<SignInController> {
                             capitalizeText('or').tr,
                             style: TextStyle(
                                 color: AppColors.textColor,
-                                fontSize: Get.width * .05),
+                                fontSize: Get.width * .035),
                           ),
                         ),
                         Container(
                           width: Get.width * .37,
-                          height: 1.5,
-                          decoration: const BoxDecoration(color: AppColors.textColor),
+                          height: 1,
+                          decoration: const BoxDecoration(color: Color.fromARGB(255, 141, 140, 140)),
                         ),
                       ],
                     ),
                     SizedBox(height: Get.height * .075),
                     ButtonOutline(
-                      height: .072,
-                      widthText: .48,
+                      height: (lang == 'en') ? .06 : .072 ,
+                      widthText: (lang == 'en') ? .65 : .48 ,
                       iconeNext: true,
                       callback: () async {
                         Get.toNamed(Routes.SLIDERSCREATECOMPANY);

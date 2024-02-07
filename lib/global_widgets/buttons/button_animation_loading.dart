@@ -20,7 +20,7 @@ class ButtonAnimateLoading extends StatelessWidget {
     this.select = false,
     this.width = double.infinity,
     this.nextText = '',
-    this.height = .067,
+    this.height = .056,
     this.load = false,
   }) : super(key: key);
 
@@ -36,7 +36,6 @@ class ButtonAnimateLoading extends StatelessWidget {
 
     return SizedBox(
       width: width,
-      // height: Get.height * height,
       height: 55,
       child: load == true
           ? const Center(child: Loader())
@@ -45,12 +44,14 @@ class ButtonAnimateLoading extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 backgroundColor: buttonColor,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5),
+                  borderRadius: BorderRadius.circular(10), // Changement ici
                 ),
               ),
-              child: Text(
-                capitalizeText("${title.tr}${' ${nextText.tr}'}"),
-                style: textStyle,
+              child: Center(
+                child: Text(
+                  capitalizeText("${title.tr}${' ${nextText.tr}'}"),
+                  style: textStyle,
+                ),
               ),
             ),
     );
