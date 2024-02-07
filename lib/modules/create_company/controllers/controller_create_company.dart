@@ -11,5 +11,5 @@ class CreateCompanyController extends GetxController {
   RxInt currentPage = 0.obs;
 
   // abonnement
-  RxInt abonementPlan = 0.obs;
+  RxInt subscriptionPlan = 0.obs;
 }

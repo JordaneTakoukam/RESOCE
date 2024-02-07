@@ -12,6 +12,9 @@ class AppColors {
   static const Color textGray =
       Color.fromARGB(255, 152, 152, 152); // Gris ardoise
 
+
+  static const Color borderGray =Color.fromARGB(255, 208, 210, 211); // Bleu ciel
+
   static const Color buttonColor = Color(0xFF3498DB); // Bleu ciel
 
   static const Color appBarTextColor =

@@ -49,6 +49,7 @@ class ICONES {
 
 class LOTTIES {
   String chooseLanguage = 'assets/lotties/language.json';
+  String success = 'assets/lotties/success.json';
 }
 
 class IMAGES {}

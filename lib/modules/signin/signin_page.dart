@@ -1,6 +1,7 @@
-// ignore_for_file: empty_catches
+// ignore_for_file: empty_catches, avoid_print
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:resoce/core/colors/color_app.dart';
 import 'package:resoce/core/functions/functions.dart';
 import 'package:resoce/core/paths/paths.dart';
 import 'package:resoce/global_widgets/animations/delay_widget.dart';
@@ -106,21 +107,46 @@ class SignInPage extends GetView<SignInController> {
                         child: Text(
                           capitalizeText("password_forgotten".tr),
                           style: TextStyle(
-                            fontSize: Get.width * .037,
+                            fontSize: Get.width * .035,
                             fontWeight: FontWeight.w800,
-                            color: Colors.black.withOpacity(.7),
+                            color: AppColors.textColor,
                           ),
                         ),
                       ),
                     ),
-                    SizedBox(height: Get.height * .13),
-                    
+                    SizedBox(height: Get.height * .075),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          width: Get.width * .37,
+                          height: 1.5,
+                          decoration: const BoxDecoration(color: AppColors.textColor),
+                        ),
+                        Padding(
+                          padding:  EdgeInsets.symmetric(horizontal: Get.width *.05),
+                          child: Text(
+                            capitalizeText('or').tr,
+                            style: TextStyle(
+                                color: AppColors.textColor,
+                                fontSize: Get.width * .05),
+                          ),
+                        ),
+                        Container(
+                          width: Get.width * .37,
+                          height: 1.5,
+                          decoration: const BoxDecoration(color: AppColors.textColor),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: Get.height * .075),
                     ButtonOutline(
-                      height: .08,
+                      height: .072,
                       widthText: .48,
                       iconeNext: true,
                       callback: () async {
-                      Get.toNamed(Routes.SLIDERSCREATECOMPANY);
+                        Get.toNamed(Routes.SLIDERSCREATECOMPANY);
                       },
                       title:
                           capitalizeText('create_account_for_my_business'.tr),

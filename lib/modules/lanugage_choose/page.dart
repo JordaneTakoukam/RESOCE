@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:resoce/core/colors/color_app.dart';
 import 'package:resoce/core/functions/functions.dart';
 import 'package:resoce/data/providers/languages_providers.dart';
 import 'package:resoce/global_widgets/animations/delay_widget.dart';
@@ -58,7 +59,8 @@ class _ChooseLangPageState extends State<ChooseLangPage> {
                       capitalizeText('choose_language'.tr),
                       style: TextStyle(
                         fontSize: Get.width * .055,
-                        fontWeight: FontWeight.bold, // color: AppColors.text1,
+                        color: AppColors.textColor,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
 

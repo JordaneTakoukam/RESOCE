@@ -24,7 +24,7 @@ class ButtonFlat extends StatelessWidget {
       this.width = 1,
       this.widthText = .6,
       this.nextText = '',
-      this.height = .062,
+      this.height = .056,
       this.load = false,
       this.iconeNext = false})
       : super(key: key);
@@ -64,7 +64,7 @@ class ButtonFlat extends StatelessWidget {
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: Get.width * .04,
+                            fontSize: Get.width * .035,
                           ),
                         ),
                       ),

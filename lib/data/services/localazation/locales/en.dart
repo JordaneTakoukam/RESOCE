@@ -9,7 +9,7 @@ final en = {
   'password_forgotten': 'password forgotten ?',
   'field_required': 'this field is required',
   'invalid_identifier': 'invalid identifier',
-  'enter_your_identifier': 'enter your identifier',
+  'enter_your_identifier': 'enter your login ID',
   'reset_password': 'reset password',
   'reset': 'reset',
   'english': 'english',
@@ -36,10 +36,16 @@ final en = {
   'try_for_free_30_days': 'try for free for 30 days',
   'register_my_business': 'register my business',
   'cancel': 'cancel',
+  'cancel_and_exit': 'cancel and exit',
+
   'create_my_profile': 'create my profile',
   'refresh': 'refresh',
   //
   'finish': 'finish',
   'subscription': 'subscription',
+  'complete_registration':
+      "to complete the registration of your business, you must create a user profile",
+  'or': 'or',
+  'almost_done': 'almost done!',
 
 };

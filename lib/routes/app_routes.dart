@@ -21,7 +21,7 @@ abstract class Routes {
   static const String ABONNEMENTCREATECOMPANY = '/abonnement-creer-company';
   static const String CONFIRMCREATECOMPANY = '/confirmer-creation-companie';
   static const String CREATEOWNERPROFILE =
-      '/creer-profil-proprietaire entreprise';
+      '/creer-profil-proprietaire-entreprise';
   static const String DASHBOARDCOMPANYNOTACTIVATED =
       '/tableaudeboard-companie-non-activee';
   static const String SLIDERSCREATECOMPANY = '/sliders-creer-company';

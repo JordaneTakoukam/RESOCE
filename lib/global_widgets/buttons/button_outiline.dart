@@ -1,6 +1,7 @@
  import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:resoce/core/colors/color_app.dart';
+import 'package:resoce/core/functions/functions.dart';
 import 'package:resoce/core/paths/paths.dart';
 import 'package:resoce/global_widgets/loader/loader.dart';
 
@@ -23,7 +24,7 @@ class ButtonOutline extends StatelessWidget {
     this.width = double.infinity,
     this.widthText = .6,
     this.nextText = '',
-    this.height = .062,
+    this.height = .055,
     this.load = false,
     this.iconeNext = false,
   }) : super(key: key);
@@ -38,7 +39,7 @@ class ButtonOutline extends StatelessWidget {
           : OutlinedButton(
               onPressed: callback,
               style: OutlinedButton.styleFrom(
-                side: BorderSide(color: AppColors.primaryColor, width: 1.5),
+                side: const BorderSide(color: AppColors.primaryColor, width: 1.5),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
@@ -49,14 +50,14 @@ class ButtonOutline extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Center(
-                      child: Container(
+                      child: SizedBox(
                         width: Get.width * widthText,
                         child: Text(
-                          "${title.tr}${' ${nextText.tr}'}",
+                          "${capitalizeText(title.tr)}${' ${nextText.tr}'}",
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: AppColors.primaryColor,
-                            fontSize: Get.width * .04,
+                            fontSize: Get.width * .035,
                             fontWeight: FontWeight.w600,
                           ),
                         ),

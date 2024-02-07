@@ -9,7 +9,7 @@ const fr = {
   "password_forgotten": "mot de passe oublié ?",
   "field_required": "ce champ est requis",
   "invalid_identifier": "identifiant invalide",
-  "enter_your_identifier": "entrez votre identifiant",
+  "enter_your_identifier": "entrez votre identifiant de connexion",
   "reset_password": "réinitialiser le mot de passe",
   "reset": "réinitialiser",
   "english": "anglais",
@@ -39,6 +39,11 @@ const fr = {
   'create_my_profile': 'créer mon profil',
   'refresh': 'actualiser',
   //
+
   'finish': 'terminer',
   'subscription': 'abonnement',
+  'complete_registration':
+      "pour finaliser l'inscription de votre entreprise, vous devez créer un profil utilisateur",
+  'or': 'ou',
+  "almost_done": "almost done!"
 };
