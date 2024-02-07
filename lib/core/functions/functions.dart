@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, avoid_print
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -92,6 +92,7 @@ String cutWord(String word, int characterLimit) {
 // precharger les images statiques de l'applications
 void preChargeImageApp(BuildContext context) async {
   try {
+    precacheImage(AssetImage(Chemin.icone.next), context);
     precacheImage(AssetImage(Chemin.logo.logo2), context);
     precacheImage(AssetImage(Chemin.icone.chatFlat), context);
     precacheImage(AssetImage(Chemin.icone.chatOutline), context);

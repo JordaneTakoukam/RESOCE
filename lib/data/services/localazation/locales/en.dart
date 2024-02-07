@@ -31,4 +31,15 @@ final en = {
   'function_in_the_company_of': 'function in the company of',
   'privilege_in_the_application': 'privilege in the application',
   'add': 'add',
+  //
+  'create_account_for_my_business': 'create an account for my business',
+  'try_for_free_30_days': 'try for free for 30 days',
+  'register_my_business': 'register my business',
+  'cancel': 'cancel',
+  'create_my_profile': 'create my profile',
+  'refresh': 'refresh',
+  //
+  'finish': 'finish',
+  'subscription': 'subscription',
+
 };

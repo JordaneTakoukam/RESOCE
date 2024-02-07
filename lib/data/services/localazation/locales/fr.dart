@@ -31,4 +31,14 @@ const fr = {
   'function_in_the_company_of': "fonction dans l'entreprise de",
   'privilege_in_the_application': "privilège dans l'application",
   'add': 'ajouter',
+  //
+  'create_account_for_my_business': 'Créer un compte\npour mon entreprise',
+  'try_for_free_30_days': 'essayer gratuitement pendant 30 jours',
+  'register_my_business': 'enregistrer mon entreprise',
+  'cancel': 'annuler',
+  'create_my_profile': 'créer mon profil',
+  'refresh': 'actualiser',
+  //
+  'finish': 'terminer',
+  'subscription': 'abonnement',
 };

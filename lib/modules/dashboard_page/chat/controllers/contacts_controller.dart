@@ -6,7 +6,9 @@ import 'package:resoce/data/providers/app_provider.dart';
 import 'package:resoce/models/contact.dart';
 import 'package:resoce/modules/dashboard_page/chat/repositories/contacts_reppository.dart';
 
+
 class ContactController extends GetxController {
+  
   var repository = ContactListRepository();
 
   @override
@@ -17,7 +19,7 @@ class ContactController extends GetxController {
   }
 
   Future getContactList() async {
-   // get contact list form local database
+    // get contact list form local database
     List<Contact> listDbContact = await LocalDb.getContacts();
     contactList.value = List<Contact>.from(listDbContact);
 
@@ -50,7 +52,12 @@ class ContactController extends GetxController {
       contactList.value = List<Contact>.from(filteredContacts);
 
       // save en local db
-      await LocalDb.setContacts(filteredContacts);
+      if (filteredContacts.isNotEmpty) {
+        await LocalDb.setContacts(filteredContacts);
+      }
+
+      print('liste totale = ${contacts.length}');
+      print('liste filtrer = ${filteredContacts.length}');
 
       //
     }

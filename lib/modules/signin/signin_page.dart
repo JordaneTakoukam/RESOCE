@@ -6,6 +6,7 @@ import 'package:resoce/core/paths/paths.dart';
 import 'package:resoce/global_widgets/animations/delay_widget.dart';
 import 'package:resoce/global_widgets/buttons/button_flat.dart';
 import 'package:resoce/global_widgets/buttons/button_icon_back.dart';
+import 'package:resoce/global_widgets/buttons/button_outiline.dart';
 import 'package:resoce/global_widgets/formes/bezier_container.dart';
 import 'package:resoce/global_widgets/pages/loading_page.dart';
 import 'package:resoce/modules/signin/controller.dart';
@@ -33,20 +34,19 @@ class SignInPage extends GetView<SignInController> {
 
           ListView(
             children: [
-              SizedBox(height: Get.height * .12),
+              SizedBox(height: Get.height * .08),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: Get.width * .09),
                 child: DelayedDisplayWidget(
                   slidingBeginOffset: const Offset(0, 0),
-                  delay: const Duration(milliseconds: 300),
+                  delay: const Duration(milliseconds: 100),
                   child: SizedBox(
-                    height: Get.width * .4,
-                    width: double.infinity,
+                    height: Get.width * .25,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(22),
                       child: Image.asset(
                         Chemin.logo.logo2,
-                        fit: BoxFit.cover,
+                        fit: BoxFit.contain,
                       ),
                     ),
                   ),
@@ -58,12 +58,12 @@ class SignInPage extends GetView<SignInController> {
                   capitalizeText("log_in".tr),
                   style: TextStyle(
                     color: Colors.black.withOpacity(.8),
-                    fontSize: Get.width * .05,
+                    fontSize: Get.width * .06,
                     fontWeight: FontWeight.w900,
                   ),
                 ),
               ),
-              SizedBox(height: Get.height * .05),
+              SizedBox(height: Get.height * .02),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: Get.width * .05),
                 child: Column(
@@ -113,7 +113,19 @@ class SignInPage extends GetView<SignInController> {
                         ),
                       ),
                     ),
-                    SizedBox(height: Get.height * .1),
+                    SizedBox(height: Get.height * .13),
+                    
+                    ButtonOutline(
+                      height: .08,
+                      widthText: .48,
+                      iconeNext: true,
+                      callback: () async {
+                      Get.toNamed(Routes.SLIDERSCREATECOMPANY);
+                      },
+                      title:
+                          capitalizeText('create_account_for_my_business'.tr),
+                      select: true,
+                    ),
                   ],
                 ),
               ),
@@ -122,13 +134,14 @@ class SignInPage extends GetView<SignInController> {
 
           //
 
-          // page de loading
-          Obx(() => LoadingPage(pageLoading: controller.pageLoading.value)),
           Positioned(
             top: Get.height * .025,
             left: 0,
             child: const ButtonRetourAuth(),
           ),
+
+          // page de loading
+          Obx(() => LoadingPage(pageLoading: controller.pageLoading.value)),
         ],
       ),
     );

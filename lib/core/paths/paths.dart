@@ -44,6 +44,7 @@ class ICONES {
   String paperPin = 'assets/icones/paper-pin.png';
   String write = 'assets/icones/write.png';
   String newUser = 'assets/icones/new-user.png';
+  String next = 'assets/icones/next.png';
 }
 
 class LOTTIES {
