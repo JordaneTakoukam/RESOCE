@@ -49,11 +49,28 @@ class ButtonDotInticator extends GetView<CreateCompanyController> {
       () => InkWell(
         onTap: () {
           if (next) {
-            controller.indicator.animateToPage(
-              controller.currentPage.value + 1,
-              duration: const Duration(milliseconds: 500),
-              curve: Curves.fastLinearToSlowEaseIn,
-            );
+            if (controller.currentPage.value < 2) {
+              controller.indicator.animateToPage(
+                controller.currentPage.value + 1,
+                duration: const Duration(milliseconds: 500),
+                curve: Curves.fastLinearToSlowEaseIn,
+              );
+            }
+            if (controller.currentPage.value == 2) {
+              if (controller.form1.value.currentState!.validate()) {
+                print('okay');
+              }
+            }
+            // if (controller.currentPage.value == 1) {}
+            // if (controller.currentPage.value == 2) {
+            // } else {
+            // controller.indicator.animateToPage(
+            //   controller.currentPage.value + 1,
+            //   duration: const Duration(milliseconds: 500),
+            //   curve: Curves.fastLinearToSlowEaseIn,
+            // );
+            // }
+
             // if (controller.currentPage.value == 0) {
             //   // if (controller.accountType.value.isEmpty) {
             //   //   toastWarning(context);

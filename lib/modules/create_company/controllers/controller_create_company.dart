@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CreateCompanyController extends GetxController {
+  Rx<GlobalKey<FormState>> form1 = GlobalKey<FormState>().obs;
+  Rx<GlobalKey<FormState>> form2 = GlobalKey<FormState>().obs;
+  Rx<GlobalKey<FormState>> form3 = GlobalKey<FormState>().obs;
+
   //
   RxBool pageLoading = false.obs;
   RxBool pageError = false.obs;

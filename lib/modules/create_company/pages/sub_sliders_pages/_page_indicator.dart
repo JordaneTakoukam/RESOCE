@@ -69,14 +69,18 @@ class DotIndicatorCreateCompany extends GetView<CreateCompanyController> {
                         width: Get.width * .7,
                         height: 50,
                         child: ButtonFlat(
-                          iconeNext:true,
+                          iconeNext: true,
                           callback: () {
-                            Get.toNamed(Routes.ABONNEMENTCREATECOMPANY);
+                            if (controller.form1.value.currentState!
+                                .validate()) {
+                              Get.toNamed(Routes.ABONNEMENTCREATECOMPANY);
+                            }
                           },
                           widthText: .35,
                           title: "continue",
                           select: true,
-                        )),
+                        ),
+                      ),
               ),
               const Spacer(),
               const ButtonDotInticator(next: true),

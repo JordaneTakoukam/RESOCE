@@ -13,10 +13,11 @@ class InputCompanyPhone1 extends GetView<CreateCompanyController> {
     return Obx(
       () => InputTextAuth(
         considereMaj: false,
-        focusNode: controller.focusCompanyName,
+        focusNode: controller.focusCompanyPhone,
         width: width,
         required: true,
-        labelText: capitalizeText('numero de telephone de la strucuture'.tr),
+        labelText:
+            capitalizeText('Numero de telephone principal de la structure'.tr),
         keyboardType: TextInputType.phone,
         controller: controller.controllerCompanyPhone.value,
         validator: (value) {
@@ -27,7 +28,6 @@ class InputCompanyPhone1 extends GetView<CreateCompanyController> {
         },
         onChanged: (String value) => {
           controller.companyPhone1.value = value,
-          print(value),
         },
       ),
     );
@@ -45,8 +45,8 @@ class InputCompanyPhone2 extends GetView<CreateCompanyController> {
         considereMaj: false,
         focusNode: controller.focusCompanyName,
         width: width,
-        required: true,
-        labelText: capitalizeText('numero de telephone de la strucuture'.tr),
+        required: false,
+        labelText: capitalizeText('Numero de telephone 2'.tr),
         keyboardType: TextInputType.phone,
         controller: controller.controllerCompanyPhone.value,
         validator: (value) {
@@ -57,7 +57,6 @@ class InputCompanyPhone2 extends GetView<CreateCompanyController> {
         },
         onChanged: (String value) => {
           controller.companyPhone2.value = value,
-          print(value),
         },
       ),
     );
@@ -75,8 +74,8 @@ class InputCompanyPhone3 extends GetView<CreateCompanyController> {
         considereMaj: false,
         focusNode: controller.focusCompanyName,
         width: width,
-        required: true,
-        labelText: capitalizeText('numero de telephone de la strucuture'.tr),
+        required: false,
+        labelText: capitalizeText('Numero de telephone 3'.tr),
         keyboardType: TextInputType.phone,
         controller: controller.controllerCompanyPhone.value,
         validator: (value) {

@@ -27,7 +27,6 @@ class InputCompanyName extends GetView<CreateCompanyController> {
         },
         onChanged: (String value) => {
           controller.companyName.value = value,
-          print(value),
         },
       ),
     );

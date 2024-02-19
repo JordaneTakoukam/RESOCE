@@ -13,7 +13,7 @@ class InputCompanyEmail extends GetView<CreateCompanyController> {
     return Obx(
       () => InputTextAuth(
         considereMaj: false,
-        focusNode: controller.focusCompanyName,
+        focusNode: controller.focusCompanyEmail,
         width: width,
         required: true,
         labelText: capitalizeText('email de la strucuture'.tr),
