@@ -1,4 +1,4 @@
-// ignore_for_file: empty_catches, unnecessary_brace_in_string_interps
+// ignore_for_file: empty_catches, unnecessary_brace_in_string_interps, avoid_print
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

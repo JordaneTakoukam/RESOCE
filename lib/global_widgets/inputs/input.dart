@@ -18,8 +18,8 @@ class InputTextAuth extends StatefulWidget {
   final dynamic focusNode;
   final bool considereMaj;
   final String hintText;
-  final ValueChanged<String>? onChanged; // Nouveau paramètre
-
+  final ValueChanged<String>? onChanged; 
+  
   const InputTextAuth({
     Key? key,
     required this.labelText,
