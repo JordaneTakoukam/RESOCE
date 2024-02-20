@@ -34,16 +34,16 @@ class SliderPage1 extends GetView<CreateCompanyController> {
               const InputCompanyEmail(),
               Row(
                 children: [
-                  Padding(
-                    padding: EdgeInsets.only(bottom: Get.height * .016),
-                    child: Stack(
-                      alignment: Alignment.centerRight,
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            Get.toNamed(Routes.COUNTRYPAGE);
-                          },
-                          child: Material(
+                  InkWell(
+                    onTap: () {
+                      Get.toNamed(Routes.COUNTRYPAGE);
+                    },
+                    child: Padding(
+                      padding: EdgeInsets.only(bottom: Get.height * .016),
+                      child: Stack(
+                        alignment: Alignment.centerRight,
+                        children: [
+                          Material(
                             elevation: 2,
                             child: Container(
                               decoration: BoxDecoration(
@@ -80,13 +80,13 @@ class SliderPage1 extends GetView<CreateCompanyController> {
                               ),
                             ),
                           ),
-                        ),
-                        Icon(
-                          Icons.arrow_drop_down_rounded,
-                          color: Colors.black,
-                          size: Get.width * .07,
-                        )
-                      ],
+                          Icon(
+                            Icons.arrow_drop_down_rounded,
+                            color: Colors.black,
+                            size: Get.width * .07,
+                          )
+                        ],
+                      ),
                     ),
                   ),
                   SizedBox(width: Get.width * .02),
@@ -158,4 +158,3 @@ class SliderPage1 extends GetView<CreateCompanyController> {
     );
   }
 }
-
