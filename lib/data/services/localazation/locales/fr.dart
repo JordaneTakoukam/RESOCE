@@ -15,7 +15,6 @@ const fr = {
   "english": "anglais",
   "french": "français",
   "choose_language": "choisissez une langue",
-  "continue_in": "continuer en",
   "chats": "discussions",
   "groups": "groupes",
   "calls": "appels",
@@ -32,7 +31,7 @@ const fr = {
   'privilege_in_the_application': "privilège dans l'application",
   'add': 'ajouter',
   //
-  'create_account_for_my_business': 'Créer un compte\npour mon entreprise',
+  'create_account_for_my_organization': 'Créer un compte pour\nmon organisation',
   'try_for_free_30_days': 'essayer gratuitement pendant 30 jours',
   'register_my_business': 'enregistrer mon entreprise',
   'cancel': 'annuler',
@@ -62,4 +61,10 @@ const fr = {
   "your_login_information": "Vos informations de connexion",
   "refresh_to_check_activation_status":
       "Actualisez pour vérifier le statut d'activation de votre entreprise",
+
+  //
+  'welcome_to': "bienvenue sur",
+  'choose_your_language': 'choisissez votre langue pour commencer',
+
+  "device's language": "langue de l'appareil",
 };

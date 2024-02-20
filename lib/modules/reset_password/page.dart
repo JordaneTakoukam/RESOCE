@@ -37,15 +37,14 @@ class ResetPasswordPage extends GetView<ResetPasswordController> {
                 padding: EdgeInsets.symmetric(horizontal: Get.width * .09),
                 child: DelayedDisplayWidget(
                   slidingBeginOffset: const Offset(0, 0),
-                  delay: const Duration(milliseconds: 300),
+                  delay: const Duration(milliseconds: 100),
                   child: SizedBox(
-                    height: Get.width * .4,
-                    width: double.infinity,
+                    height: Get.width * .25,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(22),
                       child: Image.asset(
                         Chemin.logo.logo2,
-                        fit: BoxFit.cover,
+                        fit: BoxFit.contain,
                       ),
                     ),
                   ),

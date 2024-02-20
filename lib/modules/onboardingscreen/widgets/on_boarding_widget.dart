@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:resoce/.config.dart';
 import 'package:resoce/core/colors/color_app.dart';
 import 'package:resoce/data/providers/languages_providers.dart';
 
@@ -26,11 +27,20 @@ class OnBoardingWidgets extends StatelessWidget {
       height: Get.height,
       child: Column(
         children: [
+          // Container(
+          //   height: Get.height * 0.65,
+          //   decoration: BoxDecoration(
+          //     image: DecorationImage(
+          //       image: AssetImage('$image'),
+          // scale: 1.4,
+          //     ),
+          //   ),
+          // ),
           Container(
             height: Get.height * 0.65,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('$image'),
+                image: NetworkImage(AppConfig.api + image),
                 scale: 1.4,
               ),
             ),

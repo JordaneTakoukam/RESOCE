@@ -9,7 +9,7 @@ import 'package:resoce/global_widgets/buttons/button_flat.dart';
 import 'package:resoce/global_widgets/buttons/button_icon_back.dart';
 import 'package:resoce/global_widgets/buttons/button_outiline.dart';
 import 'package:resoce/global_widgets/formes/bezier_container.dart';
-import 'package:resoce/modules/create_company/controllers/controller_create_company.dart';
+import 'package:resoce/modules/create_organization/controllers/controller_create_company.dart';
 import 'package:resoce/routes/app_pages.dart';
 
 class ConfirmCreateCompanyPage extends GetView<CreateCompanyController> {

@@ -1,6 +1,5 @@
 class AppConfig {
   static const String mode = 'dev';
-  static const String apiUrl = '';
   static const String appName = 'RESOCE';
   static const String appNameMinuscule = 'Resoce';
   static const String from = 'SDNTA SARL';

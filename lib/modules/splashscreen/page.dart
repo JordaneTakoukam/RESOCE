@@ -38,7 +38,7 @@ class SplashScreenPage extends GetView<SplashScreenController> {
                             child: SizedBox(
                               width: isLandscape
                                   ? Get.width * .30
-                                  : Get.width * .8,
+                                  : Get.width * .5,
                               child: Image.asset(Chemin.logo.logo2),
                             ),
                           ),
@@ -51,7 +51,7 @@ class SplashScreenPage extends GetView<SplashScreenController> {
                               AppConfig.appName,
                               style: TextStyle(
                                 color: AppColors.textFoncer,
-                                fontSize: 22,
+                                fontSize: 18,
                                 fontWeight: FontWeight.w800,
                               ),
                             ),

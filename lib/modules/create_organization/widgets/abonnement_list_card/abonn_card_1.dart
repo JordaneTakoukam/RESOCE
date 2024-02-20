@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:resoce/core/colors/color_app.dart';
-import 'package:resoce/modules/create_company/controllers/controller_create_company.dart';
+import 'package:resoce/modules/create_organization/controllers/controller_create_company.dart';
 
 class AbonnementCard1 extends GetView<CreateCompanyController> {
   const AbonnementCard1({super.key});

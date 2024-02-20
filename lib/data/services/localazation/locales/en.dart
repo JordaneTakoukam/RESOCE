@@ -14,8 +14,6 @@ final en = {
   'reset': 'reset',
   'english': 'english',
   'french': 'french',
-  'choose_language': 'choose a language',
-  'continue_in': 'continue in',
   'chats': 'chats',
   'groups': 'groups',
   'calls': 'calls',
@@ -32,7 +30,7 @@ final en = {
   'privilege_in_the_application': 'privilege in the application',
   'add': 'add',
   //
-  'create_account_for_my_business': 'create an account for my business',
+  'create_account_for_my_organization': 'create an account for\nmy organization',
   'try_for_free_30_days': 'try for free for 30 days',
   'register_my_business': 'register my business',
   'cancel': 'cancel',
@@ -64,4 +62,10 @@ final en = {
   "your_login_information": "your login information",
   "refresh_to_check_activation_status":
       "refresh to check the activation status of your company",
+
+  // page choose language
+  'welcome_to': "welcome to",
+  'choose_your_language': 'choose your language to get started',
+  "device's_language": "device's language",
+
 };

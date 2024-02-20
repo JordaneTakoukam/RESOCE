@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:resoce/core/colors/color_app.dart';
 import 'package:resoce/global_widgets/buttons/button_flat.dart';
-import 'package:resoce/modules/create_company/controllers/controller_create_company.dart';
-import 'package:resoce/modules/create_company/widgets/appbar_dashboard_not_activated.dart';
-import 'package:resoce/modules/create_company/widgets/dashboard_not_activated/title_text.dart';
-import 'package:resoce/modules/create_company/widgets/dashboard_not_activated/widget_info_connection.dart';
+import 'package:resoce/modules/create_organization/controllers/controller_create_company.dart';
+import 'package:resoce/modules/create_organization/widgets/appbar_dashboard_not_activated.dart';
+import 'package:resoce/modules/create_organization/widgets/dashboard_not_activated/title_text.dart';
+import 'package:resoce/modules/create_organization/widgets/dashboard_not_activated/widget_info_connection.dart';
 
 class DashboardCompanyNotActivated extends GetView<CreateCompanyController> {
   const DashboardCompanyNotActivated({super.key});

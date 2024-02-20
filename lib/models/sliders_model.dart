@@ -13,15 +13,8 @@ class SliderModel {
     return SliderModel(
       title: Map<String, String>.from(json['title']),
       description: Map<String, String>.from(json['description']),
-      image: json['image'],
+      image: json['image_url'],
     );
   }
 
-  Map<String, dynamic> toJson() {
-    return {
-      'title': title,
-      'description': description,
-      'image': image,
-    };
-  }
 }

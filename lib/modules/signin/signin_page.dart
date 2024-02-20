@@ -63,7 +63,7 @@ class SignInPage extends GetView<SignInController> {
                   capitalizeText("log_in".tr),
                   style: TextStyle(
                     color: Colors.black.withOpacity(.8),
-                    fontSize: Get.width * .06,
+                    fontSize: Get.width * .05,
                     fontWeight: FontWeight.w900,
                   ),
                 ),
@@ -153,7 +153,7 @@ class SignInPage extends GetView<SignInController> {
                         Get.toNamed(Routes.SLIDERSCREATECOMPANY);
                       },
                       title:
-                          capitalizeText('create_account_for_my_business'.tr),
+                          capitalizeText('create_account_for_my_organization'.tr),
                       select: true,
                     ),
                   ],

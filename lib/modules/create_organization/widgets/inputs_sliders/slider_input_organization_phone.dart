@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:resoce/core/functions/functions.dart';
 import 'package:resoce/global_widgets/inputs/input.dart';
-import 'package:resoce/modules/create_company/controllers/controller_create_company.dart';
+import 'package:resoce/modules/create_organization/controllers/controller_create_company.dart';
 
 class InputCompanyPhone1 extends GetView<CreateCompanyController> {
   final double width;
@@ -13,7 +13,7 @@ class InputCompanyPhone1 extends GetView<CreateCompanyController> {
     return Obx(
       () => InputTextAuth(
         considereMaj: false,
-        focusNode: controller.focusCompanyPhone,
+        focusNode: controller.focusCompanyPhone1,
         width: width,
         required: true,
         labelText:
@@ -43,12 +43,12 @@ class InputCompanyPhone2 extends GetView<CreateCompanyController> {
     return Obx(
       () => InputTextAuth(
         considereMaj: false,
-        focusNode: controller.focusCompanyName,
+        focusNode: controller.focusCompanyPhone2,
         width: width,
         required: false,
         labelText: capitalizeText('Numero de telephone 2'.tr),
         keyboardType: TextInputType.phone,
-        controller: controller.controllerCompanyPhone.value,
+        controller: controller.controllerCompanyPhone2.value,
         validator: (value) {
           if (value.isEmpty) {
             return capitalizeText('field_required'.tr);
@@ -72,12 +72,12 @@ class InputCompanyPhone3 extends GetView<CreateCompanyController> {
     return Obx(
       () => InputTextAuth(
         considereMaj: false,
-        focusNode: controller.focusCompanyName,
+        focusNode: controller.focusCompanyPhone3,
         width: width,
         required: false,
         labelText: capitalizeText('Numero de telephone 3'.tr),
         keyboardType: TextInputType.phone,
-        controller: controller.controllerCompanyPhone.value,
+        controller: controller.controllerCompanyPhone3.value,
         validator: (value) {
           if (value.isEmpty) {
             return capitalizeText('field_required'.tr);
@@ -85,7 +85,7 @@ class InputCompanyPhone3 extends GetView<CreateCompanyController> {
           return null;
         },
         onChanged: (String value) => {
-          controller.companyPhone2.value = value,
+          controller.companyPhone3.value = value,
           print(value),
         },
       ),

@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:resoce/core/colors/color_app.dart';
+import 'package:resoce/.config.dart';
 import 'package:resoce/core/functions/functions.dart';
+import 'package:resoce/core/paths/paths.dart';
 import 'package:resoce/data/providers/languages_providers.dart';
 import 'package:resoce/global_widgets/animations/delay_widget.dart';
 import 'package:resoce/global_widgets/buttons/button_flat.dart';
-import 'package:resoce/modules/lanugage_choose/widgets/card_choose_language.dart';
-import 'package:resoce/modules/lanugage_choose/widgets/lottie_language.dart';
-import 'package:resoce/modules/lanugage_choose/widgets/select_language.dart';
+import 'package:resoce/modules/onboardingscreen/controller.dart';
 import '../../../routes/app_pages.dart';
 
 class ChooseLangPage extends StatefulWidget {
@@ -20,20 +19,32 @@ class ChooseLangPage extends StatefulWidget {
 class _ChooseLangPageState extends State<ChooseLangPage> {
   // Création de l'instance du LanguageProvider
   final languageProvider = Get.find<LanguageProvider>();
-  bool click = false;
 
-  String select = '';
-  String languageSelect = '';
-  void changeSelect(value) {
-    setState(() => select = value);
+  int selectedRadioTile = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    if (languageProvider.getLanguage() == 'en') {
+      selectedRadioTile = 1;
+    } else if (languageProvider.getLanguage() == 'fr') {
+      selectedRadioTile = 2;
+    } else {
+      selectedRadioTile = 3;
+    }
   }
 
-  void setCurrentLanguageSelect(value) {
-    setState(() => languageSelect = value);
+  setSelectedRadioTile(int val, String lang) {
+    languageProvider.changeLanguage(lang);
+    setState(() {
+      selectedRadioTile = val;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    Get.put(OnBoardingController());
+
     return PopScope(
       canPop: true,
       onPopInvoked: (didPop) {},
@@ -41,80 +52,95 @@ class _ChooseLangPageState extends State<ChooseLangPage> {
         backgroundColor: Colors.white,
         body: SafeArea(
           child: Center(
-            child: CardChooseLanguage(
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: Get.width * .04),
-                child: Column(
+            child: Stack(
+              children: [
+                Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    SizedBox(height: Get.height * .02),
+                    SizedBox(height: Get.height * .1),
+                    SizedBox(
+                      width: Get.width * .5,
+                      child: Image.asset(Chemin.logo.logo2),
+                    ),
+                    SizedBox(height: Get.height * .06),
 
-                    // animation lottie
-                    const LottieLanguage(),
-                    SizedBox(height: Get.height * .02),
-
-                    // texte choisissez votre langue
                     Text(
-                      capitalizeText('choose_language'.tr),
+                      '${capitalizeText('welcome_to'.tr)} ${AppConfig.appName}',
                       style: TextStyle(
-                        fontSize: Get.width * .055,
-                        color: AppColors.textColor,
-                        fontWeight: FontWeight.w600,
+                        color: Colors.black,
+                        fontSize: Get.width * .045,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: Get.height * .01),
+
+                    Text(
+                      capitalizeText('choose_your_language'.tr),
+                      style: TextStyle(
+                        color: const Color.fromARGB(255, 88, 87, 87),
+                        fontSize: Get.width * .035,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
 
-                    // choix anglais
                     SizedBox(height: Get.height * .04),
+
+                    RadioListTile(
+                      value: 1,
+                      groupValue: selectedRadioTile,
+                      title: Text(
+                        capitalizeText('english'.tr),
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      subtitle: selectedRadioTile != 3
+                          ? Text('(${"device's_language".tr})')
+                          : Text(capitalizeText('english'.tr)),
+                      onChanged: (val) {
+                        setSelectedRadioTile(val ?? 0, 'en');
+                      },
+                      selected: selectedRadioTile == 1,
+                    ),
+                    RadioListTile(
+                      value: 2,
+                      groupValue: selectedRadioTile,
+                      title: Text(
+                        capitalizeText(languageProvider.getLanguage() != 'fr'
+                            ? 'Français'
+                            : 'French'),
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      subtitle: Text(
+                        capitalizeText('french'.tr),
+                      ),
+                      onChanged: (val) {
+                        setSelectedRadioTile(val ?? 0, 'fr');
+                      },
+                      selected: selectedRadioTile == 2,
+                    ),
+                    SizedBox(height: Get.height * .3),
+
+                    // bouton
                     DelayedDisplayWidget(
-                      delay: const Duration(milliseconds: 800),
-                      child: SelectLanguage(
-                        select: select == 'en',
-                        title: "english",
-                        callback: () {
-                          setState(() => click = true);
-                          changeSelect('en');
-                          setCurrentLanguageSelect("english");
-                          languageProvider.changeLanguage(select);
-                        },
+                      delay: const Duration(milliseconds: 200),
+                      child: Padding(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: Get.width * .04),
+                        child: ButtonFlat(
+                          title: capitalizeText('continue'.tr),
+                          iconeNext: true,
+                          callback: () {
+                            if (selectedRadioTile == 1 ||
+                                selectedRadioTile == 2) {
+                              Get.toNamed(Routes.ONBOARDING);
+                            }
+                          },
+                        ),
                       ),
                     ),
-
-                    // choix francais
-                    SizedBox(height: Get.height * .02),
-                    DelayedDisplayWidget(
-                      delay: const Duration(milliseconds: 1000),
-                      child: SelectLanguage(
-                        select: select == 'fr',
-                        title: 'french',
-                        callback: () {
-                          setState(() => click = true);
-
-                          changeSelect('fr');
-                          setCurrentLanguageSelect("french");
-                          languageProvider.changeLanguage(select);
-                        },
-                      ),
-                    ),
-
-                    // bouton valider
-                    SizedBox(height: Get.height * .07),
-                    DelayedDisplayWidget(
-                      delay: const Duration(milliseconds: 1400),
-                      child: ButtonFlat(
-                        title: capitalizeText('continue_in'.tr),
-                        nextText: languageSelect,
-                        select: select != '',
-                        callback: () {
-                          if (click) {
-                            Get.toNamed(Routes.ONBOARDING);
-                          }
-                        },
-                      ),
-                    )
                   ],
                 ),
-              ),
+              ],
             ),
           ),
         ),

@@ -14,7 +14,7 @@ class TitleSliderPage extends StatelessWidget {
     return Text(
       capitalizeText(title.tr),
       style: TextStyle(
-        fontSize: Get.width * .05,
+        fontSize: Get.width * .04,
         fontWeight: FontWeight.w600,
         color: Colors.black.withOpacity(.6),
       ),

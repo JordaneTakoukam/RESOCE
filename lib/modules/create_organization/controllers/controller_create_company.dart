@@ -22,12 +22,16 @@ class CreateCompanyController extends GetxController {
   late Rx<TextEditingController> controllerCompanyName;
   late Rx<TextEditingController> controllerCompanyEmail;
   late Rx<TextEditingController> controllerCompanyPhone;
+  late Rx<TextEditingController> controllerCompanyPhone2;
+  late Rx<TextEditingController> controllerCompanyPhone3;
 
   //
   // focus
   FocusNode focusCompanyName = FocusNode();
   FocusNode focusCompanyEmail = FocusNode();
-  FocusNode focusCompanyPhone = FocusNode();
+  FocusNode focusCompanyPhone1 = FocusNode();
+  FocusNode focusCompanyPhone2 = FocusNode();
+  FocusNode focusCompanyPhone3 = FocusNode();
 
   @override
   void onInit() {
@@ -35,6 +39,8 @@ class CreateCompanyController extends GetxController {
     controllerCompanyName = TextEditingController().obs;
     controllerCompanyEmail = TextEditingController().obs;
     controllerCompanyPhone = TextEditingController().obs;
+    controllerCompanyPhone2 = TextEditingController().obs;
+    controllerCompanyPhone3 = TextEditingController().obs;
   }
 
   @override
@@ -51,8 +57,8 @@ class CreateCompanyController extends GetxController {
   RxBool errorLocatisation = false.obs;
 
   // infomations pour la creation de l'entreprise
-  RxString companyName = ''.obs;
-  RxString companyEmail = ''.obs;
+  RxString organizationName = ''.obs;
+  RxString organizationEmail = ''.obs;
   //
   RxInt numberInputPhone = 1.obs;
   RxString companyPhone1 = ''.obs;
@@ -60,6 +66,21 @@ class CreateCompanyController extends GetxController {
   RxString companyPhone3 = ''.obs;
 
   //
+  //
+  //
+  RxString dialCode1 = ''.obs;
+  RxString dialCode2 = ''.obs;
+  RxString dialCode3 = ''.obs;
+
+  //
   RxString ceoFirstName = ''.obs;
   RxString ceoLastName = ''.obs;
+
+  void donneeInput() {
+    print('Nom  = $organizationName');
+    print('Email  = $organizationEmail');
+    print('phone 1  = $companyPhone1');
+    print('phone 2  = $companyPhone2');
+    print('phone 3 = $companyPhone3');
+  }
 }

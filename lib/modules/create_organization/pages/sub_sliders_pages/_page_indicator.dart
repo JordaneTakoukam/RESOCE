@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:resoce/core/colors/color_app.dart';
 import 'package:resoce/global_widgets/buttons/button_flat.dart';
-import 'package:resoce/modules/create_company/controllers/controller_create_company.dart';
-import 'package:resoce/modules/create_company/pages/sub_sliders_pages/slider_page1.dart';
-import 'package:resoce/modules/create_company/pages/sub_sliders_pages/slider_page2.dart';
-import 'package:resoce/modules/create_company/pages/sub_sliders_pages/slider_page3.dart';
-import 'package:resoce/modules/create_company/widgets/sliders_create_company/button_dot_indicator.dart';
+import 'package:resoce/modules/create_organization/controllers/controller_create_company.dart';
+import 'package:resoce/modules/create_organization/pages/sub_sliders_pages/slider_page2.dart';
+import 'package:resoce/modules/create_organization/pages/sub_sliders_pages/slider_page1.dart';
+import 'package:resoce/modules/create_organization/widgets/sliders_create_company/button_dot_indicator.dart';
 import 'package:resoce/routes/app_pages.dart';
-
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class DotIndicatorCreateCompany extends GetView<CreateCompanyController> {
@@ -29,11 +27,7 @@ class DotIndicatorCreateCompany extends GetView<CreateCompanyController> {
             }),
             itemCount: 3,
             itemBuilder: (context, index) {
-              return index == 0
-                  ? const SliderPage1()
-                  : index == 1
-                      ? const SliderPage2()
-                      : const SliderPage3();
+              return index == 0 ? const SliderPage1() : const SliderPage2();
             },
           ),
         ),
@@ -50,10 +44,10 @@ class DotIndicatorCreateCompany extends GetView<CreateCompanyController> {
                   : const SizedBox.shrink(),
               const Spacer(),
               Container(
-                child: controller.currentPage.value != 2
+                child: controller.currentPage.value != 1
                     ? SmoothPageIndicator(
                         controller: controller.indicator,
-                        count: 3,
+                        count: 2,
                         effect: const SlideEffect(
                           activeDotColor: AppColors.primaryColor,
                           spacing: 8.0,
@@ -71,10 +65,7 @@ class DotIndicatorCreateCompany extends GetView<CreateCompanyController> {
                         child: ButtonFlat(
                           iconeNext: true,
                           callback: () {
-                            if (controller.form1.value.currentState!
-                                .validate()) {
-                              Get.toNamed(Routes.ABONNEMENTCREATECOMPANY);
-                            }
+                            Get.toNamed(Routes.ABONNEMENTCREATECOMPANY);
                           },
                           widthText: .35,
                           title: "continue",

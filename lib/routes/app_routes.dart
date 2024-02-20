@@ -25,4 +25,5 @@ abstract class Routes {
   static const String DASHBOARDCOMPANYNOTACTIVATED =
       '/tableaudeboard-companie-non-activee';
   static const String SLIDERSCREATECOMPANY = '/sliders-creer-company';
+  static const String COUNTRYPAGE = '/page-choix-pays';
 }

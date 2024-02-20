@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:resoce/core/functions/functions.dart';
 import 'package:resoce/global_widgets/inputs/input.dart';
-import 'package:resoce/modules/create_company/controllers/controller_create_company.dart';
+import 'package:resoce/modules/create_organization/controllers/controller_create_company.dart';
 
 class InputCompanyEmail extends GetView<CreateCompanyController> {
   final double width;
@@ -26,7 +26,7 @@ class InputCompanyEmail extends GetView<CreateCompanyController> {
           return null;
         },
         onChanged: (String value) => {
-          controller.companyEmail.value = value,
+          controller.organizationEmail.value = value,
           print(value),
         },
       ),

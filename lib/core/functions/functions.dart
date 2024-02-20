@@ -110,3 +110,11 @@ void preChargeImageApp(BuildContext context) async {
     print('Erreur prechargement : $e');
   }
 }
+
+
+String convertirUnicodeEnEmoji(String unicode) {
+  List<String> unicodeList = unicode.split(' ');
+  String emoji = String.fromCharCodes(
+      unicodeList.map((e) => int.parse(e.substring(2), radix: 16)));
+  return emoji;
+}

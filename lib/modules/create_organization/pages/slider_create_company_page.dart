@@ -6,8 +6,8 @@ import 'package:resoce/global_widgets/animations/delay_widget.dart';
 import 'package:resoce/global_widgets/buttons/button_icon_back.dart';
 import 'package:resoce/global_widgets/formes/bezier_container.dart';
 import 'package:resoce/global_widgets/pages/loading_page.dart';
-import 'package:resoce/modules/create_company/controllers/controller_create_company.dart';
-import 'package:resoce/modules/create_company/pages/sub_sliders_pages/_page_indicator.dart';
+import 'package:resoce/modules/create_organization/controllers/controller_create_company.dart';
+import 'package:resoce/modules/create_organization/pages/sub_sliders_pages/_page_indicator.dart';
 
 class SlidersCreateCompanyPage extends GetView<CreateCompanyController> {
   const SlidersCreateCompanyPage({super.key});
@@ -50,11 +50,11 @@ class SlidersCreateCompanyPage extends GetView<CreateCompanyController> {
                 child: Padding(
                   padding:  EdgeInsets.symmetric(horizontal: Get.width *.2),
                   child: Text(
-                    capitalizeText("create_account_for_my_business".tr),
+                    capitalizeText("create_account_for_my_organization".tr),
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.black.withOpacity(.8),
-                      fontSize: Get.width * .06,
+                      fontSize: Get.width * .05,
                       fontWeight: FontWeight.w900,
                     ),
                   ),
